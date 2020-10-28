@@ -1,0 +1,55 @@
+---
+- name: Deploy Multi Tier App to Ansible Tower using awx.awx
+  hosts: localhost
+  gather_facts: false
+  vars: 
+    cloud_user_private_file: "~/.ssh/{{ GUID }}key.pem"
+    cloud_user_private_key: "{{ lookup('file', cloud_user_private_file, rstrip=false) }}"
+
+  tasks:
+
+  - name: Create the Flask App Project
+    awx.awx.tower_project:
+      name: Multitier Flask Project
+      organization: Default
+      description: AWX RHTR Collections project"
+      scm_type: git
+      scm_url: https://github.com/tonykay/ansible_flask_app_loader_all_in_one.git
+
+  - name: Create an Inventory
+    awx.awx.tower_inventory:
+      name: Multitier Flask Inventory
+      state: present
+      description: AWX RHTR Collections Inventory
+      organization: Default
+
+  - name: Add Inventory Source
+    awx.awx.tower_inventory_source:
+      name: "Multitier Flask Inventory Source"
+      description: "AWX RHTR Source for Inventory"
+      inventory: Multitier Flask Inventory
+      source: scm
+      source_project: Multitier Flask Project
+      source_path: hosts
+      update_on_launch: true
+
+  - name: Create Credential for Login
+    awx.awx.tower_credential:
+      name: Multitier Flask Private Key
+      description: AWX RHTR Private Key
+      organization: Default
+      kind: ssh
+      username: cloud-user
+      ssh_key_data: "{{ cloud_user_private_key }}"
+
+  - name: Create a Job Template
+    awx.awx.tower_job_template:
+      name: Multitier Job Template
+      project: Multitier Flask Project
+      inventory: Multitier Flask Inventory
+      playbook: main.yml
+      credentials: Multitier Flask Private Key
+
+  - name: Launch AWX Three Tier Job
+    awx.awx.tower_job_launch:
+      job_template: Multitier Job Template
