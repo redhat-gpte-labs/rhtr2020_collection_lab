@@ -1,7 +1,7 @@
 ---
 modules:
   01_introduction:
-    name: GitOps with RedHat Ansible Tower
+    name: Collection Lab - Tony you rock
     exit_sign: Overview
   02_overview:
     name: Overview
