@@ -26,6 +26,64 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
+=== Accessing your Environmet
+
+== Overview
+
+The lab environment consists of the systems shown here:
+
+[options=header,cols="2,1"]
+|====
+|Host Name |Description
+|`control.{GUID}.{OSP_DOMAIN}`    | Ansible Control Node with `ssh` access
+|`tower.{GUID}.{OSP_DOMAIN}`      | Ansible Tower Server
+|`frontend.{GUID}.{OSP_DOMAIN}`   | Exposed instance for HAProxy Load Balancer
+|`app1.{GUID}.{OSP_DOMAIN}`       | Internal App Server for Python/Flask API and Web Site
+|`app1.{GUID}.{OSP_DOMAIN}`       | Internal App Server for Python/Flask API and Web Site
+|`appdb1.{GUID}.{OSP_DOMAIN}`     | Internal Postgresql Server
+|====
+
+== Environment Access
+=== Set Up SSH
+
+You must have an SSH connection to your environment.
+To access your control system via SSH, use your personal OPENTLC SSO
+username and public SSH key.
+
+[NOTE]
+Unless noted otherwise, you cannot use SSH to connect directly as `root`.
+If you have not already done so, you must provide a public SSH key.
+. Go to the link:https://www.opentlc.com/account/[OPENTLC Account Management page^] and click *Update SSH Key*
+. Paste your public key in the appropriate field.
+
+[TIP]
+For more information on generating an SSH key, see link:https://www.opentlc.com/ssh.html[Setting Up an SSH Key Pair^]
+
+=== SSH into System
+
+Use SSH to remotely connect to the lab control host using your private SSH key,
+OPENTLC SSO username, and personal GUID:
+
++
+[source,bash,subs="attributes,verbatim"]
+----
+$ {SSH_COMMAND} -i path-to-your-ssh-key
+----
+
+=== Become Devops User
+
+The Devops User has full ssh capabilities into the other systems in the environment as needed.
+
+After successfully logging in to the control node, become the `devops` user:
+
++
+[source,bash,subs="attributes,verbatim"]
+----
+$ sudo su - devops
+----
+
+
+
 === Explore your environment
 
 Take a few moments to explore your environment and setup up tools, shells, packages you like to use.

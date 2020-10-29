@@ -13,10 +13,13 @@ modules:
     name: Exercise 1.2 - Ansible Tower WebUI
     exit_sign: Exercise 1.3
   04_exercise_1_3_explore_env:
-    name: Exercise 1.3 - Explore Env
+    name: Exercise 1.3 - Explore your Environment
     exit_sign: Exercise 1.4
   04_exercise_1_4_getting_started_with_collections:
     name: Exercise 1.4 - Getting Started with Collections
+    exit_sign: Exercise 1.5
+  04_exercise_1_5_using_other_ansible_commands:
+    name: Exercise 1.5 - Using other Ansible Commands with Collections
     exit_sign: Exercise 2.1
   04_exercise_2_1_installing_existing_collection:
     name: Exercise 2.1 - Installing Existing Collection
