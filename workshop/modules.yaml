@@ -15,8 +15,8 @@ modules:
   04_exercise_1_3_explore_env:
     name: Exercise 1.3 - Explore Env
     exit_sign: Exercise 2.1
-  04_exercise_2_1_gitlab_pat:
-    name: Exercise 2.1 - Gitlab PAT
+  04_exercise_2_1_awx_awx_lab:
+    name: Exercise 2.1 - AWX AWX Collection Lab
     exit_sign: Exercise 2.2
   04_exercise_2_2_storing_pat_in_ansible_tower: 
     name: Exercise 2.2 - Storing PAT in Ansible Tower
