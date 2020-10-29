@@ -23,12 +23,17 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: tru
 
-
 === Using the `awx.awx` Collection
 
 Your lab environment was designed to support a simple multi, or 3, tier application. 
 An HAProxy instance load balancing across 2 _app servers_ running a simple python flask application with a postgresql back-end.
-In this lab you will use the `awx.awx` collection to do an end to end configuration of yout *Ansible Tower* server
+In this section you will use the `awx.awx` collection to do an end to end configuration of yout *Ansible Tower* server
+
+* Setup your control node to work with Ansible Tower
+* Install the `awx.awx` collection
+* Use `awx.awx` to fully configure Ansible Tower to deploy the application
+* Launch an Ansible Tower Job Template
+
 
 ==== Getting Setup to Work with Ansible Tower
 
@@ -36,8 +41,6 @@ In this lab you will use the `awx.awx` collection to do an end to end configurat
 
 The `awx` cli client offers a useful way to check the next lab, and to interact with Ansible Tower.
 You need to enable the repository and install it via yum.
-
-
 
 . Setup the `awx` Tower CLI Repository
 

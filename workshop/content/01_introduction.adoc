@@ -1,2 +1,17 @@
 
-== Introduction
+== Ansible Collections Lab
+
+Red Hat Tech Ready 2020
+
+Welcome to the Ansible Collections Lab.
+This lab will give you hands on experience with understanding, creating, and using Collections in Ansible.
+
+This lab assumes:
+
+* You can use SSH to access remote systems
+** 2 built-in SSH options are provided 
+* You are comfortable with Ansible 
+** Playbooks
+** Modules
+** Basic variable use
+

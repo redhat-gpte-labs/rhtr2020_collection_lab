@@ -28,8 +28,12 @@
 
 === Explore your environment
 
-Take a moment to explore your environment and setup up tools, shells, packages you like to use.
+Take a few moments to explore your environment and setup up tools, shells, packages you like to use.
 You are on a Red Linux 7 control node, like many real world customers, with `ansible` and other tools and utilities installed.
+In this section you will:
+
+* Explore the installed Ansible environment and configuration
+* Validate Ansible can work with the lab infrastucture
 
 . If you are not already logged in as the `control` node's `devops` service account user, `sudo` to that account.
 
@@ -54,8 +58,8 @@ Last login: Tue Oct 27 14:46:37 EDT 2020 on pts/0
 ----
 [devops@control 0 ~]$ ansible --version
 ----
-
 +
+
 .Sample Output
 [source,bash]
 ----
@@ -121,3 +125,5 @@ appdb1.example.com | SUCCESS => {
 
 ... <TRUNCATED>
 ----
+
+In the next section we will create and work with our first Collection.

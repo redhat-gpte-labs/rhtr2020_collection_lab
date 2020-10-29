@@ -26,15 +26,25 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
-* Learn creating RedHat Ansible Tower resources.
-* Learn deploying application on test server manually.
-* Learn setting up Gitlab for Automation webhooks.
-* Learn setting up Ansible Tower jobs for Automation webhooks.
+== Overview
+
+The lab takes place on a Red Hat Enterprise Linux infrastructure.
+You will work from a Control Node `control` and use a collection to configure an Ansible Tower server to deploy your application.
+Whilst you will deploy a multi-tier application on this infrastructure, that component is secondary to learning to working with collections.
+You will:
+
+* Learn how to use collections within your playbooks
+* Learn how to install, and explore, collections
+* Learn how to create, and then use, a simple collection
+* Use the `awx.awx` collection to configure Ansible Tower
+
+In addition 2 Bonus Labs outline further Collections based challenges.
+
+=== Working with your Infrastructure
+
+The entire lab can be completed from the command line and the terminal you can see in your browser can ssh directly to your control node.
+You can also ssh directly from your laptop with the above command.
+
+In addition there is the *option* to connect via a browser to a Visual Studio Code server running on your control node giving both remote editing capability and an in-built terminal running on `control`.
 
 
-*_[GitOps] works by using Git as a single source of truth for declarative infrastructure and applications._*
-
-                                                  _-- Weaveworks, “Guide To GitOps”_
-
-
-*Using Red Hat Ansible Automation Platform to implement GitOps pipelines provides unique benefits. Utilizing the Automation Webhook capabilities in Ansible Tower, you can implement agentless GitOps workflows that go beyond just cloud-native systems and manage existing IT infrastructure such as cloud services and networking gear. Using Ansible, enables you to tap into the existing Ansible ecosystem and the flexibility and freedom to use the best tools for how you want to work.*
