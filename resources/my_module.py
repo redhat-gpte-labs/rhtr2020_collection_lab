@@ -9,7 +9,7 @@ from ansible.module_utils.basic import AnsibleModule
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            data=dict(type='str', default='Hello World!  This is my new module!'),
+            data=dict(type='str', default='Hello RHTR!  This is my new module, borrowed from somewhere!'),
         ),
         supports_check_mode=True
     )
