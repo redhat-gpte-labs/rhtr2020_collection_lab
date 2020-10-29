@@ -661,6 +661,8 @@ In this lab you will use the `awx.awx` collection to do an end to end configurat
 The `awx` cli client offers a useful way to check the next lab, and to interact with Ansible Tower.
 You need to enable the repository and install it via yum.
 
+////
+
 . Setup the `awx` Tower CLI Repository
 
 +
@@ -677,6 +679,9 @@ grabbing file https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-e
 repo saved to /etc/yum.repos.d/ansible-tower-cli-el7.repo
 ----
 +
+
+////
+
 
 . Install the `awx` cli
 
@@ -738,17 +743,137 @@ id name
 
 === Create the `awx.awx` Playbook
 
-In this section we will create a number of Tower Resources using the `awx.awx` collection, so we can deploy out application.
-If you are comfortable with Ansible Tower you are encouraged to create this yourself.
-If not a full solution is provided here.
+In this section we will create a number of Tower Resources using the `awx.awx` collection, so we can deploy our application.
+If you are comfortable with Ansible Tower you are encouraged to create this yourself using the `ansible-doc` command to configure each task using the `awx.awx` collection.
+If not a full solution is provided at the end of the section.
 
 
+.Skeleton Playbook
+[source,yaml]
+----
+---
+- name: Deploy Multi Tier App to Ansible Tower using awx.awx
+  hosts: localhost
+  gather_facts: false
+  vars: 
+    cloud_user_private_file: "~/.ssh/{{ GUID }}key.pem"
+    cloud_user_private_key: "{{ lookup('file', cloud_user_private_file, rstrip=false) }}"
+
+  tasks:
+
+  - name: Create the Flask App Project
+    awx.awx.tower_project:
+
+  - name: Create an Inventory
+    awx.awx.tower_inventory:
+
+  - name: Add Inventory Source
+    awx.awx.tower_inventory_source:
+
+  - name: Create Credential for Login
+    awx.awx.tower_credential:
+
+  - name: Create a Job Template
+    awx.awx.tower_job_template:
+----
 
 
+* Details for `awx.awx.tower_project`
+
+[cols="2",options="header"]
+|====
+| Parameter        | Value
+| name             | Multitier Flask Project
+| organization     | Default
+| description      | AWX RHTR Collections Project
+| scm_type         | git
+| scm_url`         | https://github.com/tonykay/ansible_flask_app_loader_all_in_one.git
+|====
+
+* Details for `awx.awx.tower_inventory`
+
+[cols="2",options="header"]
+|====
+| Parameter        | Value
+| name             | Multitier Flask Inventory
+| state            | present
+| organization     | Default
+| description      | AWX RHTR Collections Inventory
+|====
 
 
+* Details for `awx.awx.tower_inventory_source`
 
+[cols="2",options="header"]
+|====
+|Parameter         | Value
+| name             | Multitier Flask Inventory Source
+| organization     | Default
+| description      | AWX RHTR Collections Inventory Source
+| inventory        | Multitier Flask Inventory
+| source           | scm
+| source_project   | Multitier Flask Project
+| source_path      | hosts
+| update_on_launch | true
+|====
 
+* Details for `awx.awx.tower_credential`
+
+[cols="2",options="header"]
+|====
+|Parameter         | Value
+| name             | MMultitier Flask Private Key
+| organization     | Default
+| description      | AWX RHTR Private Key
+| kind             | ssh
+| user_name        | cloud-user
+| source_project   | Multitier Flask Project
+| ssh_key_data     | "{{ cloud_user_private_key }}"
+|====
+
+* Details for `awx.awx.tower_job_template`
+
+[cols="2",options="header"]
+|====
+| name             | Multitier Job Template
+| project          | Multitier Flask Project
+| inventory        | Multitier Flask Inventory
+| playbook         | main.yml
+| credentials      | Multitier Flask Private Key
+|====
+
+. Run your playbook providing your GUID to identify your `ssh` key
+
++
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID=n9j48
+----
++
+
+You can check the status of anyo
+
+Re-run the `awx project` command you used previously to see if a new project was created.
+
++
+[source,sh]
+----
+awx projects list -f human
+----
++
+.Sample Output
+[source,texinfo]
+----
+id name                    
+== ======================= 
+6  Demo Project            
+8  Multitier Flask Project 
+----
++
+
+You can also browse the console of your Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}* account and *{TOWER_ADMIN_PASSWORD}* as the password.
+
+. 
 
 ansible all --list-hosts
 before we get started have a look at how many ansible modules are in the current ansible distribution
