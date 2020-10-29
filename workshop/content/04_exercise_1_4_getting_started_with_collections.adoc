@@ -86,7 +86,7 @@ Ansible's included Tower modules, the `awx.awx` modules, and the `awx` cli suppo
 . Export the 4 Environmental Variables `awx` needs to communicate with Ansible Tower
 +
 
-[source,sh]
+[source,bash,subs="attributes,verbatim"]
 ----
 export TOWER_HOST=https://tower
 export TOWER_USERNAME={TOWER_ADMIN_USER}

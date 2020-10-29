@@ -1,5 +1,5 @@
 ---
-name: Best Team Lead - Collection Lab
+name: Ansible Collections Lab
 modules:
   activate:
     - 01_introduction
@@ -7,10 +7,16 @@ modules:
     - 04_exercise_1_1_vscode_webui
     - 04_exercise_1_2_tower_webui
     - 04_exercise_1_3_explore_env
-    - 04_exercise_2_1_awx_awx_lab
-    - 04_exercise_2_2_storing_pat_in_ansible_tower
-    - 04_exercise_3_1_webhook_for_push_event
-    - 04_exercise_3_2_verify_push_event
-    - 04_exercise_4_1_webhook_for_merge_event
-    - 04_exercise_4_2_verify_merge_event
-    - 05_grade_and_solve
+    - 04_exercise_1_4_getting_started_with_collections
+    - 04_exercise_2_1_installing_existing_collection
+    - 04_exercise_2_2_awx_awx_lab
+    - 04_exercise_3_1_bonus_labs
+    - 04_exercise_3_2_bonus_lab_tower_cop_collection
+    - 04_exercise_3_3_bonus_lab_postgres_collection
+    - 05_resources  
+#    - 04_exercise_2_2_storing_pat_in_ansible_tower
+#    - 04_exercise_3_1_webhook_for_push_event
+#    - 04_exercise_3_2_verify_push_event
+#    - 04_exercise_4_1_webhook_for_merge_event
+#    - 04_exercise_4_2_verify_merge_event
+#    - 05_grade_and_solve
