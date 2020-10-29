@@ -159,32 +159,28 @@ tmp/
 +
 
 Nothing there other than `tmp`, this is a new account.
-
-. Make and cd into a project folder called `rhtr-lab`
 +
 
-[source,bash]
-----
-[devops@control 0 ~]$ mkdir rhtr-lab
-[devops@control 0 ~]$ cd rhtr-lab
-----
+[NOTE]
+====
+If you had installed a collection with the `ansible-galaxy` command the `~/.ansible/collections` directory would have been created as the default location. 
+Because we will start by creating our own collection we will have to do this manually.
+====
 
+. Create the _skeleton_ structure for your new collection `redhat.rhtr`
 
-. In your current, `rhtr-lab` directory make a `collections/ansible_collections` sub-directory
 +
-
-[source,bash]
+[source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ mkdir -p collections/ansible_collections
+[devops@control 0 ~]$ ansible-galaxy collection init --init-path ~/.ansible/collections/ansible_collections redhat.rhtr 
 ----
 +
 
-. Now use the `ansible-galaxy` command to initialize your first collection
-+
-
-[source,bash]
+.Sample Output
+[source,texinfo]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-galaxy collection init --init-path collections/ansible_collections redhat.rhtr 
+- Collection redhat.rhtr was created successfully
+
 ----
 +
 
@@ -193,23 +189,25 @@ Nothing there other than `tmp`, this is a new account.
 
 [source,bash]
 ----
-[devops@control 0 ~/rhtr-lab]$ tree collections/ansible_collections/
+[devops@control 0 ~]$ tree ~/.ansible/collections/
 ----
 +
 
 .Sample Output
 [source,texinfo]
 ----
-collections/ansible_collections/
-└── redhat
-    └── rhtr
-        ├── docs
-        ├── galaxy.yml
-        ├── plugins
-        │   └── README.md
-        ├── README.md
-        └── roles
-5 directories, 3 files
+/home/devops/.ansible/collections/
+└── ansible_collections
+    └── redhat
+        └── rhtr
+            ├── docs
+            ├── galaxy.yml
+            ├── plugins
+            │   └── README.md
+            ├── README.md
+            └── roles
+
+6 directories, 3 files
 ----
 +
 
@@ -221,7 +219,7 @@ link:https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.htm
 Collections] page.
 +
 
-For reference a fuller Collection Structure:
+For reference a fuller Collection Structure looks like this:
 +
 
 [source,bash]
@@ -258,7 +256,7 @@ We will add a simple module, then explore ways to use our collection.
 
 [source,bash]
 ----
-[devops@control 0 ~/rhtr-lab]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/my_module.py
+[devops@control 0 ~]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/my_module.py
 ----
 
 . Create a `modules` sub-directory within your collections plugins directory:
@@ -266,7 +264,7 @@ We will add a simple module, then explore ways to use our collection.
 
 [source,bash]
 ----
-[devops@control 0 ~/rhtr-lab]$ mkdir collections/ansible_collections/redhat/rhtr/plugins/modules
+[devops@control 0 ~]$ mkdir ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
 ----
 
 . Move your module to the collections `plugins/modules` directory
@@ -274,7 +272,7 @@ We will add a simple module, then explore ways to use our collection.
 
 [source,bash]
 ----
-[devops@control 0 ~/rhtr-lab]$ mv my_module.py collections/ansible_collections/redhat/rhtr/plugins/modules
+[devops@control 0 ~]$ mv my_module.py ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
 ----
 
 === Using your new collection
@@ -285,6 +283,17 @@ Or alternatively, using the *Fully Qualified Collection Name*
 Let`s explore both.
 
 ==== Using the `collections` keyword
+
+
+
+. Make and cd into a project folder called `rhtr-lab`
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ mkdir rhtr-lab
+[devops@control 0 ~]$ cd rhtr-lab
+----
 
 . Create a simple playbook `collections-keyword.yml`
 +
@@ -438,35 +447,27 @@ ansible localhost -m redhat.rhtr.my_module
 .Sample Output
 [source,texinfo]
 ----
-localhost | FAILED! => {
-    "msg": "The module redhat.rhtr.my_module was not found in configured module paths"
+localhost | SUCCESS => {
+    "changed": false, 
+    "my_new_module_result": "Hello RHTR!  This is my new module, borrowed from somewhere!"
 }
 ----
 +
 
-So the `ansible` command cannot find the `redhat.rhtr` module despite being executed in the same directory as the earlier `ansible-playbook` command which succeeded?
-Unlike `ansible-playbook` which can look at the *PATH* of the playbook it is executing, other *Ansible* commands do not search the current directory for the collections directory.
-However *Ansible* does support the concept of a `collections_path` much in the same way as it supports a `roles_path`.
+[TIP]
+====
+The `ansible` *Ad-Hoc* command worked because the `redhat.rhtr` colletion was in the default location for ansible to search.
+Ansible supports a `collections_path` variable similar to `roles_path` but certainly in some versions of Ansible `2.9` it is not being honoured. 
+The upstream `2.10` release does appear to more fully use this variable.
 
-. Create a simple `ansible.cfg` file in your `~/rhtr-lab` directory
-
-+
+.An example `ansible.cfg`
 [source,sh]
 ----
 [defaults]
-collections_path: collections
+collections_path: collections:/opt/our/collections
 ----
-+
-
-. Rerun the ad hoc command
-
-ansible localhost -m  redhat.rhtr.my_module
-localhost | SUCCESS => {
-    "changed": false,
-    "my_new_module_result": "Hello World!  This is my new module!"
-}
-
-The `ansible.cfg` file with the `collections_path` gives both ad-hoc commands and other ansible commands context allowing it find the collection within the repo.
+*You do not need to add this, for reference only*
+====
 
 . Try the `ansible-doc redhat.rhtr.my_module` command again.
 
@@ -839,3 +840,27 @@ ansible-doc my_module
 Now try, but this time use the FQCN.
 
 ansible-doc redhat.rhtr.my_module
+ 
+ansible-galaxy collection init --init-path ~/.ansible/collections/ansible_collections redhat.rhtr 
+
+
+
+
+. In your current, `rhtr-lab` directory make a `collections/ansible_collections` sub-directory
++
+
+[source,bash]
+----
+[devops@control 0 ~/rhtr-lab]$ mkdir -p collections/ansible_collections
+----
++
+
+. Now use the `ansible-galaxy` command to initialize your first collection
++
+
+[source,bash]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-galaxy collection init --init-path collections/ansible_collections redhat.rhtr 
+----
++
+56G
