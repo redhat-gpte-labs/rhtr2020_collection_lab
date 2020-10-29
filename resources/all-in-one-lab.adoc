@@ -135,6 +135,31 @@ appdb1.example.com | SUCCESS => {
 
 // Intro needed
 
+In this section you will use the brand new service account `devops` to get started with *Ansible Collections*.
+
+[NOTE]
+====
+As *Collections* in Ansible evolve there are some differences in the behavior of different versions of Ansible in `2.9` and the upstream community `2.10`.
+This lab, running on `2.9.14` will do some manual steps which may soon be unnecessary, e.g. making the `~/ansible/collections/ansible_collections` directory
+====
+
+. Take a look at Ansible's default directory for any installed *collections* or *roles*
+
++
+[source,sh]
+----
+ls ~/.ansible
+----
++
+.Sample Output
+[source,texinfo]
+----
+tmp/
+----
++
+
+Nothing there other than `tmp`, this is a new account.
+
 . Make and cd into a project folder called `rhtr-lab`
 +
 
@@ -143,6 +168,7 @@ appdb1.example.com | SUCCESS => {
 [devops@control 0 ~]$ mkdir rhtr-lab
 [devops@control 0 ~]$ cd rhtr-lab
 ----
+
 
 . In your current, `rhtr-lab` directory make a `collections/ansible_collections` sub-directory
 +
@@ -196,8 +222,8 @@ Collections] page.
 +
 
 For reference a fuller Collection Structure:
-
 +
+
 [source,bash]
 ----
 ├── docs/
@@ -232,7 +258,7 @@ We will add a simple module, then explore ways to use our collection.
 
 [source,bash]
 ----
-[devops@control 0 ~/rhtr-lab]$ wget https://raw.githubusercontent.com/tonykay/rhtr2020-collections/main/resources/my_module.yml
+[devops@control 0 ~/rhtr-lab]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/my_module.py
 ----
 
 . Create a `modules` sub-directory within your collections plugins directory:
@@ -243,12 +269,12 @@ We will add a simple module, then explore ways to use our collection.
 [devops@control 0 ~/rhtr-lab]$ mkdir collections/ansible_collections/redhat/rhtr/plugins/modules
 ----
 
-Move your module to the collections `plugins/modules` directory
+. Move your module to the collections `plugins/modules` directory
 +
 
 [source,bash]
 ----
-[devops@control 0 ~/rhtr-lab]$ mv my_module.yml collections/ansible_collections/redhat/rhtr/plugins/modules
+[devops@control 0 ~/rhtr-lab]$ mv my_module.py collections/ansible_collections/redhat/rhtr/plugins/modules
 ----
 
 === Using your new collection
@@ -262,6 +288,7 @@ Let`s explore both.
 
 . Create a simple playbook `collections-keyword.yml`
 +
+
 [source,sh]
 ----
 ---
@@ -282,13 +309,14 @@ Let`s explore both.
 ----
 
 . Execute the playbook and watch it run
-
 +
+
 [source,sh]
 ----
 [devops@control 0 ~/rhtr-lab]$ ansible-playbook collections-keyword.yml
 ----
 +
+
 .Sample Output
 [source,texinfo]
 ----
@@ -296,7 +324,6 @@ Let`s explore both.
 PLAY [RHTR getting started with collections] *************************************************************************************************************************************************************
 
 TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
-
 ok: [localhost]
 
 TASK [Call the collection module] ************************************************************************************************************************************************************************
@@ -307,16 +334,22 @@ ok: [localhost] => {
     "r_my_module": {
         "changed": false, 
         "failed": false, 
-        "my_new_module_result": "Hello World!  This is my new module!"
+        "my_new_module_result": "Hello RHTR!  This is my new module, borrowed from somewhere!"
     }
 }
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
 ----
 +
 
-The above playbook works, however as your collection use grows and you use modules from multiple collections and from future versions of *Ansible* itself not only do the risk of names collisions arise but also it is hard to work out where `my_module` comes from. This becomes even more complex with roles, include_tasks etc. Consider this snippet:
-+
+[NOTE]
+====
+The above playbook works, however as your collection use grows and you use modules from multiple collections and from future versions of *Ansible* itself not only do the risk of names collisions arise but also it is hard to work out where `my_module` comes from.
+This becomes even more complex with roles, include_tasks etc referencing collections.
+Consider this snippet:
 
-+
 [source,sh]
 ----
 collections:
@@ -330,6 +363,7 @@ collections:
       my_module:
         name: confused
 ----
+====
 
 ==== FQCNs (Fully Qualified Collection Names)
 
@@ -375,9 +409,9 @@ ok: [localhost]
 TASK [Output the my_module output] ***********************************************************************************************************************************************************************
 ok: [localhost] => {
     "r_my_module": {
-        "changed": false,
-        "failed": false,
-        "my_new_module_result": "Hello World!  This is my new module!"
+        "changed": false, 
+        "failed": false, 
+        "my_new_module_result": "Hello RHTR!  This is my new module, borrowed from somewhere!"
     }
 }
 
