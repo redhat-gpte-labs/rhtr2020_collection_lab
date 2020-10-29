@@ -456,7 +456,7 @@ localhost | SUCCESS => {
 
 [TIP]
 ====
-The `ansible` *Ad-Hoc* command worked because the `redhat.rhtr` colletion was in the default location for ansible to search.
+The `ansible` *Ad-Hoc* command worked because the `redhat.rhtr` collection was in the default location for ansible to search.
 Ansible supports a `collections_path` variable similar to `roles_path` but certainly in some versions of Ansible `2.9` it is not being honoured. 
 The upstream `2.10` release does appear to more fully use this variable.
 
@@ -469,14 +469,48 @@ collections_path: collections:/opt/our/collections
 *You do not need to add this, for reference only*
 ====
 
-. Try the `ansible-doc redhat.rhtr.my_module` command again.
+. Try using `ansible-doc` to see your modules documentation
 
++
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-doc my_module
+----
++
+.Sample Output
+[source,texinfo]
+----
+[WARNING]: module my_module not found in: /home/devops/.ansible/plugins/modules:/usr/share/ansible/plugins/modules:/usr/lib/python2.7/site-packages/ansible/modules
+----
++
+
+Ansible is unable to find the module
+
+. Try again using the *FQCN* 
+
++
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-doc redhat.rhtr.my_module
+----
++
+.Sample Output
+[source,texinfo]
+----
+> MY_MODULE    (/home/devops/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules/my_module.py)
+
+        A trivial test module, this looks like it was based on ping ssh or local connections only
+
+<OUTPUT TRUNCATED>
+----
+
+// Break here
 
 == Installing an Existing Collection
 
 In this section we will *not* explore the excellent, supported, content on Ansible Automation Hub but rather work with an upstream collection `awx.awx` from Ansible Galaxy.
-This simplifies, in a limited time, setting up Automation Hub credentials etc.
-However if you already have these and are comfortable using *Automation Hub* then the next couple of sections can be completed using the official `ansible.tower` collection in place of `awx.awx.`
+This simplifies, in limited lab time, setting up Automation Hub credentials etc.
+However if you already have these and are comfortable using *Automation Hub* then the next 2 sections can be completed using the official `ansible.tower` collection in place of `awx.awx.`
 
 Good starting points to working with Automation Hub are here:
 
@@ -565,7 +599,7 @@ This allows all projects on your control node to find and use it.
 ----
 +
 
-Ansible already has many modules with the same names. Let's explore how to see the differences with `ansible-doc`.
+Ansible already has a number of, depreciated, modules with the same names as some of those above. Let's explore how to see the differences with `ansible-doc`.
 
 . Use `ansible-doc` to look up the `tower_project` module
 
@@ -586,7 +620,7 @@ Ansible already has many modules with the same names. Let's explore how to see t
 + 
 
 The path given in the output confirms that this is the original *Ansible* `tower_project`. 
-Fortunately the `ansible-doc` command supports *FQCNs*.
+Fortunately again we can use `ansible-doc` command with the *FQCNs*.
 
 . Retry the `ansible-doc` command, but this time using the *FQCN*
 
@@ -608,7 +642,7 @@ Fortunately the `ansible-doc` command supports *FQCNs*.
 
 This time we see the newer, and more fully featured, `awx.awx` module.
 
-A good introduction to the `awx.awx` *colelction* can be found on the Ansible Insider Blog written by Bianca Henderson link:https://www.ansible.com/blog/introducing-the-awx-collection[Introducing: The AWX and Ansible Tower Collections]
+A good introduction to the `awx.awx` *collection* can be found on the Ansible Insider Blog written by Bianca Henderson link:https://www.ansible.com/blog/introducing-the-awx-collection[Introducing: The AWX and Ansible Tower Collections]
 
 
 // End of section
@@ -622,18 +656,12 @@ In this lab you will use the `awx.awx` collection to do an end to end configurat
 
 ==== Getting Setup to Work with Ansible Tower
 
-The `root` account already has a `.tower_cli.cfg` file that `awx.awx` supports as a credentail source
 
-. Copy `/root/.tower_cli.cfg` to `~/devops/.tower_cli.cfg`
 
-+
-[source,sh]
-----
-devops@control 0 ~/rhtr-lab]$ sudo cat /root/.tower_cli.cfg > ~/.tower_cli.cfg
-----
-+
+The `awx` cli client offers a useful way to check the next lab, and to interact with Ansible Tower.
+You need to enable the repository and install it via yum.
 
-. Setup the `awx` Tower CLI Repositary
+. Setup the `awx` Tower CLI Repository
 
 +
 [source,sh]
@@ -672,15 +700,20 @@ Dependency Installed:
 
 ----
 
-. Setup your shell environment for working with `awx` cli and *Ansible Tower*
+To work with Ansible Tower there are a number of ways to authenticate: the modules support username, host, password, or API token, or a `tower_cli.cfg` file.
+The `awx` cli also supports command line arguments.
+In this section we will take advantage of using Shell Environmental Variables which is another approach and very flexible if you use multiple different Tower environments.
+Ansible's included Tower modules, the `awx.awx` modules, and the `awx` cli support Environmental Variables.
 
+. Export the 4 Environmental Variables `awx` needs to communicate with Ansible Tower
 +
+
 [source,sh]
 ----
-[devops@control 0 ~]$ export TOWER_HOST=https://tower
-[devops@control 0 ~]$ export TOWER_USERNAME=admin
-[devops@control 0 ~]$ export TOWER_PASSWORD=njJpRFNPrTic
-[devops@control 0 ~]$ export TOWER_VERIFY_SSL=false
+export TOWER_HOST=https://tower
+export TOWER_USERNAME={TOWER_ADMIN_USER}
+export TOWER_PASSWORD={TOWER_ADMIN_PASSWORD}
+export TOWER_VERIFY_SSL=false
 ----
 +
 
@@ -689,7 +722,7 @@ Dependency Installed:
 
 [source,sh]
 ----
-[devops@control 2 ~]$ awx projects list -f human
+[devops@control 0 ~]$ awx projects list -f human
 ----
 +
 
@@ -701,6 +734,7 @@ id name
 6  Demo Project 
 ----
 
+// End of Section
 
 === Create the `awx.awx` Playbook
 
