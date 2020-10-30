@@ -28,61 +28,58 @@
 
 === Accessing your Environmet
 
-== Overview
-
-The lab environment consists of the systems shown here:
+The lab environment consists of the following servers
 
 [options=header,cols="2,1"]
 |====
 |Host Name |Description
-|`control.{GUID}.{OSP_DOMAIN}`    | Ansible Control Node with `ssh` access
-|`tower.{GUID}.{OSP_DOMAIN}`      | Ansible Tower Server
-|`frontend.{GUID}.{OSP_DOMAIN}`   | Exposed instance for HAProxy Load Balancer
-|`app1.{GUID}.{OSP_DOMAIN}`       | Internal App Server for Python/Flask API and Web Site
-|`app1.{GUID}.{OSP_DOMAIN}`       | Internal App Server for Python/Flask API and Web Site
-|`appdb1.{GUID}.{OSP_DOMAIN}`     | Internal Postgresql Server
+|`control.{GUID}.{OSP_DOMAIN}`  | Ansible Control Node with `ssh` access
+|`tower.{GUID}.{OSP_DOMAIN}`    | Ansible Tower Server
+|`frontend1.example.com`        | Exposed instance for HAProxy Load Balancer
+|`app1.example.com`             | Internal App Server for Python/Flask API and Web Site
+|`app2.example.com`             | Internal App Server for Python/Flask API and Web Site
+|`appdb1.example.com`           | Internal Postgresql Server
 |====
 
-== Environment Access
-=== Set Up SSH
-
-You must have an SSH connection to your environment.
-To access your control system via SSH, use your personal OPENTLC SSO
-username and public SSH key.
-
 [NOTE]
-Unless noted otherwise, you cannot use SSH to connect directly as `root`.
-If you have not already done so, you must provide a public SSH key.
-. Go to the link:https://www.opentlc.com/account/[OPENTLC Account Management page^] and click *Update SSH Key*
-. Paste your public key in the appropriate field.
+====
+For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastucutree.
+The terminal session you see to the right is a container (Pod) running on a Red Hat OpenShift Cluster - it is *not* your
+*Control Node*.
 
-[TIP]
-For more information on generating an SSH key, see link:https://www.opentlc.com/ssh.html[Setting Up an SSH Key Pair^]
+====
 
-=== SSH into System
+=== Access your Control Node
 
-Use SSH to remotely connect to the lab control host using your private SSH key,
-OPENTLC SSO username, and personal GUID:
+As mentioned in the introduction you have a number of ways to access your control node.
 
-+
-[source,bash,subs="attributes,verbatim"]
-----
-$ {SSH_COMMAND} -i path-to-your-ssh-key
-----
+. Use Visual Studio Code as outlined in Exercise 1.1
+. `ssh` directly from the terminal session in your browser
+. `ssh` directly from your laptop
 
-=== Become Devops User
-
-The Devops User has full ssh capabilities into the other systems in the environment as needed.
-
-After successfully logging in to the control node, become the `devops` user:
+. Use SSH to remotely connect to the lab control host
++ 
+Your `ssh` password is *{SSH_PASSWORD}*
 
 +
+
 [source,bash,subs="attributes,verbatim"]
 ----
-$ sudo su - devops
+$ {SSH_COMMAND} 
 ----
 
 
+=== Become the `devops` Service Account User
+
+The `devops` user has passwordless sudo access and fully configured ssh access to all other systems in the lab environment.
+
+. After successfully logging in to the control node, become the `devops` user:
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+[student@control 0 ~]$ sudo su - devops
+----
 
 === Explore your environment
 
@@ -90,28 +87,13 @@ Take a few moments to explore your environment and setup up tools, shells, packa
 You are on a Red Linux 7 control node, like many real world customers, with `ansible` and other tools and utilities installed.
 In this section you will:
 
+* If desired install your favorite editors and tools, `vim` is pre-installed
 * Explore the installed Ansible environment and configuration
 * Validate Ansible can work with the lab infrastucture
 
-. If you are not already logged in as the `control` node's `devops` service account user, `sudo` to that account.
-
-+
-[source,bash]
-----
-[my-user@control 0 ~]$ sudo su - devops
-----
-+
-
-.Sample Output
-[source,texinfo]
-----
-Last login: Tue Oct 27 14:46:37 EDT 2020 on pts/0
-[devops@control 0 ~]$
-----
-
 . Explore your `ansible` setup
-
 +
+
 [source,bash]
 ----
 [devops@control 0 ~]$ ansible --version
@@ -121,7 +103,7 @@ Last login: Tue Oct 27 14:46:37 EDT 2020 on pts/0
 .Sample Output
 [source,bash]
 ----
-ansible 2.9.10
+ansible 2.9.14
   config file = /etc/ansible/ansible.cfg
   configured module search path = [u'/home/devops/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
   ansible python module location = /usr/lib/python2.7/site-packages/ansible
@@ -129,9 +111,6 @@ ansible 2.9.10
   python version = 2.7.5 (default, Jun 11 2019, 14:33:56) [GCC 4.8.5 20150623 (Red Hat 4.8.5-39)]
 ----
 +
-
-Whilst this is the current, supported version, of `ansible` at this writing we'll want something more cutting edge to fully
-explore `collections` later.
 
 . Explore your lab environment
 +
@@ -183,5 +162,10 @@ appdb1.example.com | SUCCESS => {
 
 ... <TRUNCATED>
 ----
+
+. Examine any other files or directories which may be of interest e.g.
+
+* `/etc/ansible/hosts`
+* `~/.ssh/config`
 
 In the next section we will create and work with our first Collection.
