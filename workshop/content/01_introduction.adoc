@@ -1,17 +1,29 @@
-
 == Ansible Collections Lab
 
 Red Hat Tech Ready 2020
 
 Welcome to the Ansible Collections Lab.
 This lab will give you hands on experience with understanding, creating, and using Collections in Ansible.
+During the labs you will:
 
-This lab assumes:
+* Work with Ansible collections
+* Use `ansible-galaxy` to create and install collections
+* Write, and use, Ansible playbooks using collection based modules
+* Learn about the structure and usage of collections
 
-* You can use SSH to access remote systems
-** 2 built-in SSH options are provided 
+// video::_0gD_nVWk3o[youtube, width=640, height=360]
+
+=== Assumptions
+
+All code samples and commands are supplied, though you are encouraged where possible to write your own playbooks.
+
 * You are comfortable with Ansible 
 ** Playbooks
 ** Modules
 ** Basic variable use
+** Ansible Tower basic concepts
+* You can use SSH to access remote systems, either by:
+** From the terminal to the right of these instructions
+** From your laptop
+** A fully embedded Visual Studio Code alternative is also supplied for browser based access
 

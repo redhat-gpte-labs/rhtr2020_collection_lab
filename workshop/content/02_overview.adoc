@@ -30,20 +30,83 @@
 
 The lab takes place on a Red Hat Enterprise Linux infrastructure.
 You will work from a Control Node `control` and use a collection to configure an Ansible Tower server to deploy your application.
-Whilst you will deploy a multi-tier application on this infrastructure, that component is secondary to learning to working with collections.
-You will:
+
+image::images/rhtr_lab_topology.png[]
+
+.Lab Server Infrastucture
+[options=header,cols="2,3"]
+|====
+|Host Name |Description
+|`control.{GUID}.{OSP_DOMAIN}`  | Ansible Control Node with `ssh` access
+|`tower.{GUID}.{OSP_DOMAIN}`    | Ansible Tower Server
+|`frontend1.example.com`        | Exposed instance for HAProxy Load Balancer
+|`app1.example.com`             | Internal App Server for Python/Flask API and Web Site
+|`app2.example.com`             | Internal App Server for Python/Flask API and Web Site
+|`appdb1.example.com`           | Internal Postgresql Server
+|====
+
+[NOTE]
+====
+For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastucutree.
+The terminal session you see to the right is a container (Pod) running on a Red Hat OpenShift Cluster - it is *not* your
+*Control Node*.
+
+====
+
+=== Lab Goals
+
+Whilst you will deploy a multi-tier application onto this infrastructure, that component is secondary to learning to work with collections.
+During the course of the lab you will:
 
 * Learn how to use collections within your playbooks
 * Learn how to install, and explore, collections
 * Learn how to create, and then use, a simple collection
 * Use the `awx.awx` collection to configure Ansible Tower
 
-In addition 2 Bonus Labs outline further Collections based challenges.
+In addition *Bonus Labs* outline further Collections based challenges.
+
+=== Access Options for your Control Node
+
+As mentioned in the introduction you have a number of ways to access your control node.
+The entire lab can be completed, and verified, from the command line, hower Ansible Tower credentails will be supplied.
+
+. `ssh` directly from the terminal session in your browser
+. `ssh` directly from your laptop
+. Use Visual Studio Code as outlined in the next Section
+
+==== Use SSH to remotely connect to the lab control host
+
+
+. Either in the terminal session in your browser or from your laptop `ssh` to `control`.
++
+
+Your `ssh` password is *{SSH_PASSWORD}*
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+$ {SSH_COMMAND} 
+----
++
+
+. Become the `devops` Service Account User with `sudo`
++
+
+The `devops` user has passwordless sudo access and fully configured ssh access to all other systems in the lab environment.
+
+. After successfully logging in to the control node, become the `devops` user:
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+[student@control 0 ~]$ sudo su - devops
+----
+
 
 === Working with your Infrastructure
 
-The entire lab can be completed from the command line and the terminal you can see in your browser can ssh directly to your control node.
-You can also ssh directly from your laptop with the above command.
+The entire lab can be completed solely from the command line and the terminal you can see in your browser can ssh directly to your control node.
+You can also ssh directly from your laptop with the command.
 
 In addition there is the *option* to connect via a browser to a Visual Studio Code server running on your control node giving both remote editing capability and an in-built terminal running on `control`.
 

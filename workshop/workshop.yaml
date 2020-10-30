@@ -4,6 +4,7 @@ modules:
   activate:
     - 01_introduction
     - 02_overview 
+    - 03_exercise_1_1_getting_started 
     - 04_exercise_1_1_vscode_webui
     - 04_exercise_1_2_tower_webui
     - 04_exercise_1_3_explore_env
