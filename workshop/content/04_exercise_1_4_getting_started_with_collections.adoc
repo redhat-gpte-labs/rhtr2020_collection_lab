@@ -23,12 +23,18 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: tru
 
-
 === Getting started with Collections
 
 // Intro needed
 
-In this section you will use the brand new service account `devops` to get started with *Ansible Collections*.
+In this section you will create and use your own collection.
+
+* Use `ansible-galaxy` to create a minimal collection skeleton strucutre
+* Understand the structure and contents of a collection
+* Add a module to your collection
+* Use a collection module via the `collections` keyword
+* Use a collection module via its Fully Qualified Collection Name
+
 
 [NOTE]
 ====
@@ -51,7 +57,7 @@ tmp/
 ----
 +
 
-Nothing there other than `tmp`, this is a new account.
+There should be nothing there other than `tmp`, this is a new account.
 +
 
 [NOTE]
@@ -138,11 +144,23 @@ For reference a fuller Collection Structure looks like this:
 │   └── tasks/
 └── tests/
 ----
++
+[NOTE]
+====
+The collection structure above shows that a collection can include a selection of Ansible resources including:
+
+* modules (and associated libraries)
+* plugins
+* inventory plugins
+* roles
+* playbooks (undocumented in `2.9.14` and `2.10`)
+
+====
 
 === Adding to your collection
 
-Let's add some functionality to our `redhat.rhtr` collection.
-We will add a simple module, then explore ways to use our collection.
+Now add some functionality to your `redhat.rhtr` collection.
+You will add a simple module, then explore ways to use it from your collection.
 
 . Either write your own module, or more easily, download the one below:
 +
@@ -176,8 +194,6 @@ Or alternatively, using the *Fully Qualified Collection Name*
 Let`s explore both.
 
 ==== Using the `collections` keyword
-
-
 
 . Make and cd into a project folder called `rhtr-lab`
 +
@@ -254,7 +270,7 @@ Consider this snippet:
 
 [source,sh]
 ----
-collections:
+  collections:
     - foo.foo
     - foo.bar
     - bar.foo
@@ -263,7 +279,7 @@ collections:
 
     - name: Where is the my_module module, foo.foo, foo.bar, bar.foo
       my_module:
-        name: confused
+        data: confused
 ----
 ====
 
