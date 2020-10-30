@@ -1,7 +1,7 @@
 ---
 modules:
   01_introduction:
-    name: Collection Lab - Tony you rock
+    name: Collection Lab - Introduction
     exit_sign: Overview
   02_overview:
     name: Overview
