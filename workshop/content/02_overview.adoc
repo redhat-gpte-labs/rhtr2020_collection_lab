@@ -26,11 +26,8 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
-== Overview
-
 The lab takes place on a Red Hat Enterprise Linux infrastructure.
 You will work from a Control Node `control` and use a collection to configure an Ansible Tower server to deploy your application.
-
 
 [cols="1a",grid=none,width=90%]
 |===
@@ -44,7 +41,7 @@ You will work from a Control Node `control` and use a collection to configure an
 |Host Name |Description
 |`control.{GUID}.{OSP_DOMAIN}`  | Ansible Control Node with `ssh` access
 |`tower.{GUID}.{OSP_DOMAIN}`    | Ansible Tower Server
-|`frontend1.example.com`        | Exposed instance for HAProxy Load Balancer
+|`frontend1.{GUID}.{OSP_DOMAIN}`| Exposed instance for HAProxy Load Balancer
 |`app1.example.com`             | Internal App Server for Python/Flask API and Web Site
 |`app2.example.com`             | Internal App Server for Python/Flask API and Web Site
 |`appdb1.example.com`           | Internal Postgresql Server

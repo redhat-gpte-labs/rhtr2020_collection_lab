@@ -1,19 +1,18 @@
 ---
 modules:
   01_introduction:
-    name: Collection Lab - Introduction
+    name: Introduction
     exit_sign: Overview
   02_overview:
     name: Overview
-    exit_sign: Getting Started
-  03_exercise_1_getting_started:
-    name: Getting Started
-    exit_sign: 'Optional: Using Visual Studio Code WebUI'
+    exit_sign: 'Optional - Using Visual Studio Code WebUI'
+      # 03_exercise_1_getting_started:
+      # name: Getting Started
   03_exercise_2_vscode_webui:
-    name: 'Optional: Using Visual Studio Code'
-    exit_sign: Optional Using Ansible Tower WebUI
+    name: 'Optional - Using Visual Studio Code'
+    exit_sign: 'Optional - Using Ansible Tower WebUI'
   03_exercise_3_tower_webui:
-    name: Optional Using Ansible Tower WebUI
+    name: 'Optional - Using Ansible Tower WebUI'
     exit_sign: Exercise 1.1
   04_exercise_1_explore_env:
     name: Exercise 1.1 - Explore your Environment
@@ -28,7 +27,7 @@ modules:
     name: Exercise 2.1 - Installing Existing Collection
     exit_sign: Exercise 2.2
   05_exercise_2_awx_awx_lab:
-    name: Exercise 2.1 - AWX AWX Collection Lab
+    name: Exercise 2.2 - AWX AWX Collection Lab
     exit_sign: Exercise 3.1
   06_exercise_1_bonus_labs:
     name: Exercise 3.1 - Bonus Labs
