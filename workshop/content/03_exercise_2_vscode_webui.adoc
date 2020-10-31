@@ -27,8 +27,6 @@
 :show_solution: true
 
 
-== Access VScode WebUI
-
 *Visual Studio Code* is entirely optional for this lab.
 It is actually running on the `control` node, as the `devops` user and offers both local file editing and direct terminal access to `control`.
 The *primary* use cases is for those of you who prefer a more fully featured editor than `vim` or perhaps prefer not to work with Windows `ssh` clients.

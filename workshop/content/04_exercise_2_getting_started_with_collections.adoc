@@ -23,8 +23,6 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: tru
 
-=== Getting started with Collections
-
 
 // TODO: More detailed intro needed?
 
@@ -363,7 +361,5 @@ Collection Roles can also reference other collections via dependencies.
 See the link:https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html[Developing Collections] documentation.
 
 ====
-
-
 
 In the next section we will look at how other `ansible` commands work with collections.

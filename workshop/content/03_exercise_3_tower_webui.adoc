@@ -26,7 +26,6 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
-=== Ansible Tower
 
 Whilst a significant component of the Lab will be using a collection, `awx.awx` to configure Ansible Tower you *do not* actually need to access the Web UI.
 However you use the Ansible Tower Console to visually check your work and validate your playbook is working correctly.

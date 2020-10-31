@@ -26,37 +26,6 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
-=== Access your Control Node
-
-As mentioned in the introduction you have a number of ways to access your control node.
-
-. Use Visual Studio Code as outlined in Exercise 1.1
-. `ssh` directly from the terminal session in your browser
-. `ssh` directly from your laptop
-
-. Use SSH to remotely connect to the lab control host
-+ 
-Your `ssh` password is *{SSH_PASSWORD}*
-
-+
-
-[source,bash,subs="attributes,verbatim"]
-----
-$ {SSH_COMMAND} 
-----
-
-=== Become the `devops` Service Account User
-
-The `devops` user has passwordless sudo access and fully configured ssh access to all other systems in the lab environment.
-
-. After successfully logging in to the control node, become the `devops` user:
-+
-
-[source,bash,subs="attributes,verbatim"]
-----
-[student@control 0 ~]$ sudo su - devops
-----
-
 === Explore your environment
 
 Take a few moments to explore your environment and setup up tools, shells, packages you like to use.
@@ -65,7 +34,7 @@ In this section you will:
 
 * If desired install your favorite editors and tools, `vim` is pre-installed
 * Explore the installed Ansible environment and configuration
-* Validate Ansible can work with the lab infrastucture
+* Validate Ansible can work with the lab infrastructure
 
 . Explore your `ansible` setup
 +
