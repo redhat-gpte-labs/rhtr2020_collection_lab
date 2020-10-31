@@ -24,6 +24,17 @@
 :show_solution: tru
 
 
+
+=== Bonus Labs
+
+If you wish to continue your exploration of collections 3 *Bonus Labs* or challenges are provided.
+These are broadly described over the next 3 sections but *do not* provide solutions.
+
+. Repeat the entire lab using the upstream Ansible 2.10 release
+. Explore, and use, the `redhat_cop.tower_configuration` collection
+. 
+
+
 === Using the `awx.awx` Collection
 
 Your lab environment was designed to support a simple multi, or 3, tier application. 

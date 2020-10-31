@@ -25,11 +25,12 @@
 
 === Getting started with Collections
 
-// Intro needed
+
+// TODO: More detailed intro needed?
 
 In this section you will create and use your own collection.
 
-* Use `ansible-galaxy` to create a minimal collection skeleton strucutre
+* Use `ansible-galaxy` to create a minimal collection skeleton structure
 * Understand the structure and contents of a collection
 * Add a module to your collection
 * Use a collection module via the `collections` keyword
@@ -155,7 +156,17 @@ The collection structure above shows that a collection can include a selection o
 * roles
 * playbooks (undocumented in `2.9.14` and `2.10`)
 
+
+[cols="1a",grid=none,width=90%]
+|===
+^| image::images/collection_contents.png[]
+^| Figure 1 - Collections Content
+|===
+
 ====
+
+
+
 
 === Adding to your collection
 
@@ -264,7 +275,7 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 
 [NOTE]
 ====
-The above playbook works, however as your collection use grows and you use modules from multiple collections and from future versions of *Ansible* itself not only do the risk of names collisions arise but also it is hard to work out where `my_module` comes from.
+The above playbook works, however as your collection use grows and you use modules from multiple collections and from future versions of *Ansible* itself not only does the risk of names collisions arise but also it is difficult to debug and troubleshoot where `my_module` comes from.
 This becomes even more complex with roles, include_tasks etc referencing collections.
 Consider this snippet:
 
@@ -338,3 +349,21 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 
 ----
 
+=== Bonus Activity
+
+Collections also support *roles*. 
+Write a simple *role* in your new `redhat.rhtr` collection, perhaps using `debug` or the collections own `my_module`.
+
+[TIP]
+====
+Collection roles have visibility of the collections modules, and will automatically search within the collection for a module such as `my_module`.
+Collection Roles can also be found via the `collections` keyword, or the Fully Qualified Collection Name which is preferable.
+
+Collection Roles can also reference other collections via dependencies.
+See the link:https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html[Developing Collections] documentation.
+
+====
+
+
+
+In the next section we will look at how other `ansible` commands work with collections.

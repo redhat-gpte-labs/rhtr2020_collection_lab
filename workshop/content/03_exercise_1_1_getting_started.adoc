@@ -34,7 +34,7 @@ In this section you will:
 
 * If desired install your favorite editors and tools, `vim` is pre-installed
 * Explore the installed Ansible environment and configuration
-* Validate Ansible can work with the lab infrastucture
+* Validate Ansible can work with the lab infrastructure
 
 . Explore your `ansible` setup
 +

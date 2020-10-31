@@ -43,7 +43,7 @@ The lab environment consists of the following servers
 
 [NOTE]
 ====
-For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastucutree.
+For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastructure.
 The terminal session you see to the right is a container (Pod) running on a Red Hat OpenShift Cluster - it is *not* your
 *Control Node*.
 

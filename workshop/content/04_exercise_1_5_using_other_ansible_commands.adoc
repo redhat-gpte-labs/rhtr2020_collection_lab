@@ -26,7 +26,8 @@
 
 === Using Collections with Other `ansible` commands
 
-So `ansible-playbook` clearly understands both the `collections` keyword and also FQCNs. What about other ansible commands? Such as *Ad-Hoc* commands with `ansible`?
+So `ansible-playbook` fully supports collections using both the `collections` keyword and also FQCNs.
+What about other ansible commands? Such as *Ad-Hoc* commands with `ansible`?
 
 . Try an *Ad-Hoc* command using the FQCN
 
