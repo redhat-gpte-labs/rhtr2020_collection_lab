@@ -26,7 +26,7 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
-=== Accessing your Environmet
+=== Accessing your Environment
 
 The lab environment consists of the following servers
 

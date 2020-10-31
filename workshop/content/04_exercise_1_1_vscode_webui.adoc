@@ -29,7 +29,24 @@
 
 == Access VScode WebUI
 
-In this section, you will explore VScode Server webui and it's components.
+*Visual Studio Code* is entirely optional for this lab.
+It is actually running on the `control` node, as the `devops` user and offers both local file editing and direct terminal access to `control`.
+The *primary* use cases is for those of you who prefer a more fully featured editor than `vim` or perhaps prefer not to work with Windows `ssh` clients.
+
+Feel free to *bypass* this optional section.
+
+[TIP] 
+====
+If you enjoy a full featured editor for Ansible and many other platforms and languages then *VSC* (Visual Studio Code) has excellent support.
+This lab was written in a mixture of `vim` and *VSC*.
+
+VSC is a free download and can be both local i.e. on your laptop with a remote development option over `ssh` and also can be served as in our case where it runs on `control`.
+
+The curious can see how it was configured for this lab link:https://github.com/redhat-cop/agnosticd/tree/development/ansible/roles/vscode-server[here]
+
+====
+
+In this section, you will explore Visual Studio Code Server webui and it's components.
 
 . To access VScode server, open new tab in your browser and type `{VSCODE_UI_URL}` & enter password *{VSCODE_UI_PASSWORD}* when prompted -
 
@@ -45,8 +62,6 @@ In this section, you will explore VScode Server webui and it's components.
 ^| image::images/06_vscode_login_2.png[]
 ^| Figure 2 - VScode Server WebUI
 |===
-
-
 
 == VScode Terminal
 

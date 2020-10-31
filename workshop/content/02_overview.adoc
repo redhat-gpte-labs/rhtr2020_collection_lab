@@ -31,9 +31,14 @@
 The lab takes place on a Red Hat Enterprise Linux infrastructure.
 You will work from a Control Node `control` and use a collection to configure an Ansible Tower server to deploy your application.
 
-image::images/rhtr_lab_topology.png[]
 
-.Lab Server Infrastucture
+[cols="1a",grid=none,width=90%]
+|===
+^| image::images/rhtr_lab_topology.png[]
+^| Figure 1 - Lab Topology
+|===
+
+.Lab Server Infrastructure
 [options=header,cols="2,3"]
 |====
 |Host Name |Description
@@ -47,7 +52,7 @@ image::images/rhtr_lab_topology.png[]
 
 [NOTE]
 ====
-For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastucutree.
+For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastructure.
 The terminal session you see to the right is a container (Pod) running on a Red Hat OpenShift Cluster - it is *not* your
 *Control Node*.
 
@@ -68,7 +73,7 @@ In addition *Bonus Labs* outline further Collections based challenges.
 === Access Options for your Control Node
 
 As mentioned in the introduction you have a number of ways to access your control node.
-The entire lab can be completed, and verified, from the command line, hower Ansible Tower credentails will be supplied.
+The entire lab can be completed, and verified, from the command line, however Ansible Tower credentials will be supplied.
 
 . `ssh` directly from the terminal session in your browser
 . `ssh` directly from your laptop
@@ -92,7 +97,7 @@ $ {SSH_COMMAND}
 . Become the `devops` Service Account User with `sudo`
 +
 
-The `devops` user has passwordless sudo access and fully configured ssh access to all other systems in the lab environment.
+The `devops` user has password-less sudo access and fully configured ssh access to all other systems in the lab environment.
 
 . After successfully logging in to the control node, become the `devops` user:
 +
@@ -102,7 +107,6 @@ The `devops` user has passwordless sudo access and fully configured ssh access t
 [student@control 0 ~]$ sudo su - devops
 ----
 
-
 === Working with your Infrastructure
 
 The entire lab can be completed solely from the command line and the terminal you can see in your browser can ssh directly to your control node.
@@ -110,4 +114,4 @@ You can also ssh directly from your laptop with the command.
 
 In addition there is the *option* to connect via a browser to a Visual Studio Code server running on your control node giving both remote editing capability and an in-built terminal running on `control`.
 
-
+In the next section you will review, and access, your environment.

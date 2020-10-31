@@ -26,12 +26,20 @@
 :markup-in-source: verbatim,attributes,quotes
 :show_solution: true
 
+=== Ansible Tower
+
+Whilst a significant component of the Lab will be using a collection, `awx.awx` to configure Ansible Tower you *do not* actually need to access the Web UI.
+However you use the Ansible Tower Console to visually check your work and validate your playbook is working correctly.
+
+Like *Visual Studio Code* this section is entirely optional.
 
 In this section, you will explore RedHat Ansible Tower Web UI and it's components.
 
 . Use the public IP address or DNS name to access the `tower` node.
 
-. Sign in to the Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}*
+. Access link:https://tower.{GUID}.{OSP_DOMAIN}[Ansible Tower]
+
+. Sign in to the Ansible Tower web UI as an administrator using the *{TOWER_ADMIN_USER}*
 account and *{TOWER_ADMIN_PASSWORD}* as the password.
 +
 Open browser and type *{TOWER_URL}*
@@ -43,40 +51,7 @@ Open browser and type *{TOWER_URL}*
 ^| Figure 1 - Ansible Tower WebUI
 |===
 
+=== Explore Tower
 
-== Browse Inventory
-
-
-In this section, explore the inventory created during the Ansible Tower installation and determine its managed hosts.
-
-. Under the *RESOURCES* section of the left navigation bar, click *Inventories*.
-* Expect to see an inventory named `{inventory_prod}` and `{inventory_test}` that was created as part of lab setup.
-
-. Click on the both inventories one by one to view the details of the inventories.
-* Under the *GROUPS* section of respective inventories, expect to see that each inventory is composed of groups e.g under `{inventory_test}` *testservers* group.
-
-* To explore further click on group name to list hosts.
-
-== View Credential Details
-
-In this section, explore the details of the credential created as part of lab setup.
-
-. Under the *RESOURCES* section of the left navigation bar, click *Credentials*.
-
-. Expect to see following credentials -
-+
-|===
-| Name | Credential Type | Description
-| gitlab_credential | scm | for project sync 
-| cloud_credential | openstack | for openstack api authentication
-| host_credential | machine | for ssh username and key to connect hosts
-|===
-
-. Click on credentials one by one to view the details of the credentials.
-
-
-[cols="1a",grid=none,width=80%]
-|===
-^| image::images/04_tower_credentials.png[]
-^| Figure 2 - Ansible Tower Credentials
-|===
+Explore Ansible Tower using the the left hand navigation sidebar, it should be empty apart from some *Demo* resources.
+Later you will populate it using the `awx.awx` collection.
