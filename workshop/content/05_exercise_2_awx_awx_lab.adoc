@@ -33,10 +33,8 @@ In this lab you will use the `awx.awx` collection to do an end to end configurat
 ==== Getting Setup to Work with Ansible Tower
 
 
-
 The `awx` cli client offers a useful way to check the next lab, and to interact with Ansible Tower.
 You need to enable the repository and install it via yum.
-
 
 
 . Setup the `awx` Tower CLI Repository
@@ -215,20 +213,41 @@ If not a full solution is provided at the end of the section.
 | credentials      | Multitier Flask Private Key
 |====
 
-. Run your playbook providing your GUID to identify your `ssh` key
 
+=== Solution
+
+. A full solution can be downloaded here
 +
+
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/tower-load-flask-deployer.yml
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+--2020-10-31 15:05:09--
+https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/tower-load-flask-deployer.yml
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.64.133, 151.101.192.133, 151.101.128.133, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.64.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1712 (1.7K) [text/plain]
+Saving to: ‘tower-load-flask-deployer.yml’
+----
+
+. Run your playbook providing your GUID to identify your `ssh` key
++
+
 [source,sh]
 ----
 [devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID=n9j48
 ----
+
+. Re-run the `awx project` command you used previously to see if a new project was created.
 +
 
-You can check the status of anyo
-
-Re-run the `awx project` command you used previously to see if a new project was created.
-
-+
 [source,sh]
 ----
 awx projects list -f human
@@ -247,4 +266,4 @@ id name
 You can also browse the console of your Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}* account and
 *{SSH_PASSWORD}* as the password.
 
-. 
+. Launch your newly created Tower `job_template` with the `awx` command
