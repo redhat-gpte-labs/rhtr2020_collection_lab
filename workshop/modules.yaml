@@ -6,38 +6,38 @@ modules:
   02_overview:
     name: Overview
     exit_sign: Getting Started
-  03_exercise_1_1_getting_started:
+  03_exercise_1_getting_started:
     name: Getting Started
-    exit_sign: Optional: Using Visual Studio Code WebUI
-  04_exercise_1_1_vscode_webui:
-    name: Optional: Using Visual Studio Code
-    exit_sign: Optional: Using Ansible Tower WebUI
-  04_exercise_1_2_tower_webui:
-    name: Optional: Using Ansible Tower WebUI
+    exit_sign: Optional Using Visual Studio Code WebUI
+  03_exercise_2_vscode_webui:
+    name: Optional Using Visual Studio Code
+    exit_sign: Optional Using Ansible Tower WebUI
+  03_exercise_3_tower_webui:
+    name: Optional Using Ansible Tower WebUI
     exit_sign: Exercise 1.1
-  04_exercise_1_3_explore_env:
-    name: Exercise 1.2 - Explore your Environment
+  04_exercise_1_explore_env:
+    name: Exercise 1.1 - Explore your Environment
     exit_sign: Exercise 1.4
-  04_exercise_1_4_getting_started_with_collections:
-    name: Exercise 1.4 - Getting Started with Collections
-    exit_sign: Exercise 1.5
-  04_exercise_1_5_using_other_ansible_commands:
-    name: Exercise 1.5 - Using other Ansible Commands with Collections
+  04_exercise_2_getting_started_with_collections:
+    name: Exercise 1.2 - Getting Started with Collections
+    exit_sign: Exercise 1.3
+  04_exercise_3_using_other_ansible_commands:
+    name: Exercise 1.3 - Using other Ansible Commands with Collections
     exit_sign: Exercise 2.1
-  04_exercise_2_1_installing_existing_collection:
+  05_exercise_1_installing_existing_collection:
     name: Exercise 2.1 - Installing Existing Collection
     exit_sign: Exercise 2.2
-  04_exercise_2_2_awx_awx_lab:
+  05_exercise_2_awx_awx_lab:
     name: Exercise 2.1 - AWX AWX Collection Lab
     exit_sign: Exercise 3.1
-  04_exercise_3_1_bonus_labs:
+  06_exercise_1_bonus_labs:
     name: Exercise 3.1 - Bonus Labs
     exit_sign: Exercise 3.2
-  04_exercise_3_2_bonus_lab_tower_cop_collection:
+  06_exercise_2_bonus_lab_tower_cop_collection:
     name: Exercise 3.2 - Ansible CoP Tower Collection
     exit_sign: Exercise 3.2
-  04_exercise_3_3_bonus_lab_postgres_collection:
+  06_exercise_3_bonus_lab_postgres_collection:
     name: Exercise 3.3 - Postgres Collection
     exit_sign: Resources
-  05_resources:
+  07_resources:
     name: Resources

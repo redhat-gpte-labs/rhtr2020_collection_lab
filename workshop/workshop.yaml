@@ -3,16 +3,16 @@ name: Ansible Collections Lab
 modules:
   activate:
     - 01_introduction
-    - 02_overview 
-    - 03_exercise_1_1_getting_started 
-    - 04_exercise_1_1_vscode_webui
-    - 04_exercise_1_2_tower_webui
-    - 04_exercise_1_3_explore_env
-    - 04_exercise_1_4_getting_started_with_collections
-    - 04_exercise_1_5_using_other_ansible_commands
-    - 04_exercise_2_1_installing_existing_collection
-    - 04_exercise_2_2_awx_awx_lab
-    - 04_exercise_3_1_bonus_labs
-    - 04_exercise_3_2_bonus_lab_tower_cop_collection
-    - 04_exercise_3_3_bonus_lab_postgres_collection
-    - 05_resources  
+    - 02_overview
+    - 03_exercise_1_getting_started
+    - 03_exercise_2_vscode_webui
+    - 03_exercise_3_tower_webui
+    - 04_exercise_1_explore_env
+    - 04_exercise_2_getting_started_with_collections
+    - 04_exercise_3_using_other_ansible_commands
+    - 05_exercise_1_installing_existing_collection
+    - 05_exercise_2_awx_awx_lab
+    - 06_exercise_1_bonus_labs
+    - 06_exercise_2_bonus_lab_tower_cop_collection
+    - 06_exercise_3_bonus_lab_postgres_collection
+    - 07_resources
