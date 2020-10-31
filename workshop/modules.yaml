@@ -16,7 +16,7 @@ modules:
     exit_sign: Exercise 1.1
   04_exercise_1_explore_env:
     name: Exercise 1.1 - Explore your Environment
-    exit_sign: Exercise 1.4
+    exit_sign: Exercise 1.2
   04_exercise_2_getting_started_with_collections:
     name: Exercise 1.2 - Getting Started with Collections
     exit_sign: Exercise 1.3

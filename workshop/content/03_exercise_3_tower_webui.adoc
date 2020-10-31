@@ -32,16 +32,12 @@ However you use the Ansible Tower Console to visually check your work and valida
 
 Like *Visual Studio Code* this section is entirely optional.
 
-In this section, you will explore RedHat Ansible Tower Web UI and it's components.
-
-. Use the public IP address or DNS name to access the `tower` node.
+In this section, you will access and  the explore RedHat Ansible Tower Web UI and it's components.
 
 . Access link:https://tower.{GUID}.{OSP_DOMAIN}[Ansible Tower]
 
-. Sign in to the Ansible Tower web UI as an administrator using the *{TOWER_ADMIN_USER}*
-account and *{TOWER_ADMIN_PASSWORD}* as the password.
-+
-Open browser and type *{TOWER_URL}*
+. Sign in to the Ansible Tower Web UI using the *{TOWER_ADMIN_USER}*
+account and *{SSH_PASSWORD}* as the password.
 +
 
 [cols="1a",grid=none,width=80%]

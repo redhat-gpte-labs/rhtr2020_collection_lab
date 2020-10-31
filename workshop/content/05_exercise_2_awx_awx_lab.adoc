@@ -90,7 +90,7 @@ Ansible's included Tower modules, the `awx.awx` modules, and the `awx` cli suppo
 ----
 export TOWER_HOST=https://tower
 export TOWER_USERNAME={TOWER_ADMIN_USER}
-export TOWER_PASSWORD={TOWER_ADMIN_PASSWORD}
+export TOWER_PASSWORD={SSH_PASSWORD}
 export TOWER_VERIFY_SSL=false
 ----
 +
@@ -244,6 +244,7 @@ id name
 ----
 +
 
-You can also browse the console of your Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}* account and *{TOWER_ADMIN_PASSWORD}* as the password.
+You can also browse the console of your Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}* account and
+*{SSH_PASSWORD}* as the password.
 
 . 

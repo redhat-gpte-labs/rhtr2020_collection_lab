@@ -28,7 +28,8 @@
 
 === Access your Control Node
 
-As mentioned in the introduction you have a number of ways to access your control node.
+If you have not already done so access your *Control Node*.
+As mentioned in the introduction you have a number of ways to access `control`.
 
 . Use Visual Studio Code as outlined in Exercise 1.1
 . `ssh` directly from the terminal session in your browser
@@ -57,7 +58,7 @@ The `devops` user has passwordless sudo access and fully configured ssh access t
 [student@control 0 ~]$ sudo su - devops
 ----
 
-=== Explore your environment
+=== Explore your Ansible Configuration
 
 Take a few moments to explore your environment and setup up tools, shells, packages you like to use.
 You are on a Red Linux 7 control node, like many real world customers, with `ansible` and other tools and utilities installed.
@@ -138,6 +139,43 @@ appdb1.example.com | SUCCESS => {
 
 ... <TRUNCATED>
 ----
++
+
+. Confirm you can `ssh` directly to a host e.g. `appdb1`
+
++
+[source,sh]
+----
+[devops@control 0 ~]$ ssh appdb1
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+Warning: Permanently added 'appdb1' (ECDSA) to the list of known hosts.
+Last login: Sat Oct 31 14:15:37 2020 from 192.168.47.208
+[cloud-user@appdb1 ~]$ 
+----
+
+. Exit back to your Control Node
+
++
+[source,sh]
+----
+[cloud-user@appdb1 ~]$ exit 
+----
++
+.Sample Output
+[source,texinfo]
+----
+logout
+Shared connection to appdb1 closed.
+[devops@control 0 ~]$
+----
++
+
+You have now confirmed you have installed and configured Ansible Environment
 
 . Examine any other files or directories which may be of interest e.g.
 

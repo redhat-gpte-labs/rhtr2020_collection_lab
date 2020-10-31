@@ -52,11 +52,11 @@ ls ~/.ansible
 .Sample Output
 [source,texinfo]
 ----
-tmp/
+cp/ tmp/
 ----
 +
 
-There should be nothing there other than `tmp`, this is a new account.
+There should be nothing there other than `cp` and `tmp`, this is a new environment.
 +
 
 [NOTE]
@@ -171,7 +171,7 @@ The collection structure above shows that a collection can include a selection o
 Now add some functionality to your `redhat.rhtr` collection.
 You will add a simple module, then explore ways to use it from your collection.
 
-. Either write your own module, or more easily, download the one below:
+. Either write your own module, or more easily download the one below:
 +
 
 [source,bash]
