@@ -1,0 +1,171 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:GITLAB_URL: %gitlab_url%
+:GITLAB_USERNAME: %gitlab_username%
+:GITLAB_PASSWORD: %gitlab_password%
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: true
+
+=== Accessing your Environment
+
+The lab environment consists of the following servers
+
+[options=header,cols="2,1"]
+|====
+|Host Name |Description
+|`control.{GUID}.{OSP_DOMAIN}`  | Ansible Control Node with `ssh` access
+|`tower.{GUID}.{OSP_DOMAIN}`    | Ansible Tower Server
+|`frontend1.example.com`        | Exposed instance for HAProxy Load Balancer
+|`app1.example.com`             | Internal App Server for Python/Flask API and Web Site
+|`app2.example.com`             | Internal App Server for Python/Flask API and Web Site
+|`appdb1.example.com`           | Internal Postgresql Server
+|====
+
+[NOTE]
+====
+For the curious this configuration is running on a Red Hat OpenStack Cluster hosted on an IBM bare metal cloud infrastructure.
+The terminal session you see to the right is a container (Pod) running on a Red Hat OpenShift Cluster - it is *not* your
+*Control Node*.
+
+====
+
+=== Access your Control Node
+
+As mentioned in the introduction you have a number of ways to access your control node.
+
+. Use Visual Studio Code as outlined in Exercise 1.1
+. `ssh` directly from the terminal session in your browser
+. `ssh` directly from your laptop
+
+. Use SSH to remotely connect to the lab control host
++ 
+Your `ssh` password is *{SSH_PASSWORD}*
+
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+$ {SSH_COMMAND} 
+----
+
+
+=== Become the `devops` Service Account User
+
+The `devops` user has passwordless sudo access and fully configured ssh access to all other systems in the lab environment.
+
+. After successfully logging in to the control node, become the `devops` user:
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+[student@control 0 ~]$ sudo su - devops
+----
+
+=== Explore your environment
+
+Take a few moments to explore your environment and setup up tools, shells, packages you like to use.
+You are on a Red Linux 7 control node, like many real world customers, with `ansible` and other tools and utilities installed.
+In this section you will:
+
+* If desired install your favorite editors and tools, `vim` is pre-installed
+* Explore the installed Ansible environment and configuration
+* Validate Ansible can work with the lab infrastucture
+
+. Explore your `ansible` setup
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ ansible --version
+----
++
+
+.Sample Output
+[source,bash]
+----
+ansible 2.9.14
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/home/devops/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python2.7/site-packages/ansible
+  executable location = /bin/ansible
+  python version = 2.7.5 (default, Jun 11 2019, 14:33:56) [GCC 4.8.5 20150623 (Red Hat 4.8.5-39)]
+----
++
+
+. Explore your lab environment
++
+
+[source,sh]
+----
+[devops@control 0 ~]$ ansible all --list-hosts
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+
+  hosts (5):
+    app1.example.com
+    app2.example.com
+    appdb1.example.com
+    frontend1.example.com
+    tower.example.com
+----
+
+. Check you have a working `ssh` config and that `ansible` can connect
++
+
+[source,bash]
+----
+[devops@control 0 ~] $ ansible all -m ping
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+app1.example.com | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+appdb1.example.com | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+... <TRUNCATED>
+----
+
+. Examine any other files or directories which may be of interest e.g.
+
+* `/etc/ansible/hosts`
+* `~/.ssh/config`
+
+In the next section we will create and work with our first Collection.

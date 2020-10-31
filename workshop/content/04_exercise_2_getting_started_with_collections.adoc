@@ -1,0 +1,369 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: tru
+
+=== Getting started with Collections
+
+
+// TODO: More detailed intro needed?
+
+In this section you will create and use your own collection.
+
+* Use `ansible-galaxy` to create a minimal collection skeleton structure
+* Understand the structure and contents of a collection
+* Add a module to your collection
+* Use a collection module via the `collections` keyword
+* Use a collection module via its Fully Qualified Collection Name
+
+
+[NOTE]
+====
+As *Collections* in Ansible evolve there are some differences in the behavior of different versions of Ansible in `2.9` and the upstream community `2.10`.
+This lab, running on `2.9.14` will do some manual steps which may soon be unnecessary, e.g. making the `~/ansible/collections/ansible_collections` directory
+====
+
+. Take a look at Ansible's default directory for any installed *collections* or *roles*
+
++
+[source,sh]
+----
+ls ~/.ansible
+----
++
+.Sample Output
+[source,texinfo]
+----
+tmp/
+----
++
+
+There should be nothing there other than `tmp`, this is a new account.
++
+
+[NOTE]
+====
+If you had installed a collection with the `ansible-galaxy` command the `~/.ansible/collections` directory would have been created as the default location. 
+Because we will start by creating our own collection we will have to do this manually.
+====
+
+. Create the _skeleton_ structure for your new collection `redhat.rhtr`
+
++
+[source,sh]
+----
+[devops@control 0 ~]$ ansible-galaxy collection init --init-path ~/.ansible/collections/ansible_collections redhat.rhtr 
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+- Collection redhat.rhtr was created successfully
+
+----
++
+
+. Explore the resulting directory structure
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ tree ~/.ansible/collections/
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+/home/devops/.ansible/collections/
+└── ansible_collections
+    └── redhat
+        └── rhtr
+            ├── docs
+            ├── galaxy.yml
+            ├── plugins
+            │   └── README.md
+            ├── README.md
+            └── roles
+
+6 directories, 3 files
+----
++
+
+This is a minimal `collection` structure and further directories can be added as necessary
+Collections are part of `ansible 2.9` but some areas are still evolving e.g. the `playbooks` directory structure
+and its usage.  
+The best documentation source is the official
+link:https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html[Ansible Developing
+Collections] page.
++
+
+For reference a fuller Collection Structure looks like this:
++
+
+[source,bash]
+----
+├── docs/
+├── galaxy.yml
+├── meta/
+│   └── runtime.yml
+├── plugins/
+│   ├── modules/
+│   │   └── module1.py
+│   ├── inventory/
+│   └── .../
+├── README.md
+├── roles/
+│   ├── role1/
+│   ├── role2/
+│   └── .../
+├── playbooks/
+│   ├── files/
+│   ├── vars/
+│   ├── templates/
+│   └── tasks/
+└── tests/
+----
++
+[NOTE]
+====
+The collection structure above shows that a collection can include a selection of Ansible resources including:
+
+* modules (and associated libraries)
+* plugins
+* inventory plugins
+* roles
+* playbooks (undocumented in `2.9.14` and `2.10`)
+
+
+[cols="1a",grid=none,width=90%]
+|===
+^| image::images/collection_contents.png[]
+^| Figure 1 - Collections Content
+|===
+
+====
+
+
+
+
+=== Adding to your collection
+
+Now add some functionality to your `redhat.rhtr` collection.
+You will add a simple module, then explore ways to use it from your collection.
+
+. Either write your own module, or more easily, download the one below:
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/my_module.py
+----
+
+. Create a `modules` sub-directory within your collections plugins directory:
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ mkdir ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
+----
+
+. Move your module to the collections `plugins/modules` directory
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ mv my_module.py ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
+----
+
+=== Using your new collection
+
+Collection *modules* can be called in 2 different ways.
+Either by using the `collections` keyword and defining a `list` of one or more collections.
+Or alternatively, using the *Fully Qualified Collection Name*
+Let`s explore both.
+
+==== Using the `collections` keyword
+
+. Make and cd into a project folder called `rhtr-lab`
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ mkdir rhtr-lab
+[devops@control 0 ~]$ cd rhtr-lab
+----
+
+. Create a simple playbook `collections-keyword.yml`
++
+
+[source,sh]
+----
+---
+- name: RHTR getting started with collections
+  hosts: localhost
+  collections:
+    - redhat.rhtr
+
+  tasks:
+
+    - name: Call the collection module
+      my_module:
+      register: r_my_module
+
+    - name: Output the my_module output
+      debug:
+        var: r_my_module
+----
+
+. Execute the playbook and watch it run
++
+
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-playbook collections-keyword.yml
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+
+PLAY [RHTR getting started with collections] *************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Call the collection module] ************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Output the my_module output] ***********************************************************************************************************************************************************************
+ok: [localhost] => {
+    "r_my_module": {
+        "changed": false, 
+        "failed": false, 
+        "my_new_module_result": "Hello RHTR!  This is my new module, borrowed from somewhere!"
+    }
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+----
++
+
+[NOTE]
+====
+The above playbook works, however as your collection use grows and you use modules from multiple collections and from future versions of *Ansible* itself not only does the risk of names collisions arise but also it is difficult to debug and troubleshoot where `my_module` comes from.
+This becomes even more complex with roles, include_tasks etc referencing collections.
+Consider this snippet:
+
+[source,sh]
+----
+  collections:
+    - foo.foo
+    - foo.bar
+    - bar.foo
+
+  tasks:
+
+    - name: Where is the my_module module, foo.foo, foo.bar, bar.foo
+      my_module:
+        data: confused
+----
+====
+
+==== FQCNs (Fully Qualified Collection Names)
+
+The *recommended* practice, when working with *collections*, is to to use FQCNs (Fully Qualified Collection Names). Let's re-write our playbook in this style as `fqcn.yml`
+
+[source,sh]
+----
+- name: RHTR getting started with collections
+  hosts: localhost
+
+  tasks:
+
+    - name: Call the collection module
+      redhat.rhtr.my_module:
+      register: r_my_module
+
+    - name: Output the my_module output
+      debug:
+        var: r_my_module
+----
+
+. Run your playbook
+
++
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-playbook fqcn.yml 
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+
+PLAY [RHTR getting started with collections] *************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Call the collection module] ************************************************************************************************************************************************************************
+ok: [localhost]
+
+TASK [Output the my_module output] ***********************************************************************************************************************************************************************
+ok: [localhost] => {
+    "r_my_module": {
+        "changed": false, 
+        "failed": false, 
+        "my_new_module_result": "Hello RHTR!  This is my new module, borrowed from somewhere!"
+    }
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+localhost                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+----
+
+=== Bonus Activity
+
+Collections also support *roles*. 
+Write a simple *role* in your new `redhat.rhtr` collection, perhaps using `debug` or the collections own `my_module`.
+
+[TIP]
+====
+Collection roles have visibility of the collections modules, and will automatically search within the collection for a module such as `my_module`.
+Collection Roles can also be found via the `collections` keyword, or the Fully Qualified Collection Name which is preferable.
+
+Collection Roles can also reference other collections via dependencies.
+See the link:https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html[Developing Collections] documentation.
+
+====
+
+
+
+In the next section we will look at how other `ansible` commands work with collections.

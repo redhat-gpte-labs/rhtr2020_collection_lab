@@ -1,0 +1,100 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: tru
+
+
+=== Using Collections with Other `ansible` commands
+
+So `ansible-playbook` fully supports collections using both the `collections` keyword and also FQCNs.
+What about other ansible commands? Such as *Ad-Hoc* commands with `ansible`?
+
+. Try an *Ad-Hoc* command using the FQCN
+
++
+[source,sh]
+----
+ansible localhost -m redhat.rhtr.my_module
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+localhost | SUCCESS => {
+    "changed": false, 
+    "my_new_module_result": "Hello RHTR!  This is my new module, borrowed from somewhere!"
+}
+----
++
+
+[TIP]
+====
+The `ansible` *Ad-Hoc* command worked because the `redhat.rhtr` collection was in the default location for ansible to search.
+Ansible supports a `collections_path` variable similar to `roles_path` but certainly in some versions of Ansible `2.9` it is not being honoured. 
+The upstream `2.10` release does appear to more fully use this variable.
+
+.An example `ansible.cfg`
+[source,sh]
+----
+[defaults]
+collections_path: collections:/opt/our/collections
+----
+*You do not need to add this, for reference only*
+====
+
+. Try using `ansible-doc` to see your modules documentation
+
++
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-doc my_module
+----
++
+.Sample Output
+[source,texinfo]
+----
+[WARNING]: module my_module not found in: /home/devops/.ansible/plugins/modules:/usr/share/ansible/plugins/modules:/usr/lib/python2.7/site-packages/ansible/modules
+----
++
+
+Ansible is unable to find the module
+
+. Try again using the *FQCN* 
+
++
+[source,sh]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-doc redhat.rhtr.my_module
+----
++
+.Sample Output
+[source,texinfo]
+----
+> MY_MODULE    (/home/devops/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules/my_module.py)
+
+        A trivial test module, this looks like it was based on ping ssh or local connections only
+
+<OUTPUT TRUNCATED>
+----
+

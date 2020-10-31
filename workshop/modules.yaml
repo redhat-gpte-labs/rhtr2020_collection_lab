@@ -8,9 +8,9 @@ modules:
     exit_sign: Getting Started
   03_exercise_1_getting_started:
     name: Getting Started
-    exit_sign: Optional Using Visual Studio Code WebUI
+    exit_sign: 'Optional: Using Visual Studio Code WebUI'
   03_exercise_2_vscode_webui:
-    name: Optional Using Visual Studio Code
+    name: 'Optional: Using Visual Studio Code'
     exit_sign: Optional Using Ansible Tower WebUI
   03_exercise_3_tower_webui:
     name: Optional Using Ansible Tower WebUI

@@ -1,0 +1,116 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:GITLAB_URL: %gitlab_url%
+:GITLAB_USERNAME: %gitlab_username%
+:GITLAB_PASSWORD: %gitlab_password%
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: true
+
+=== Explore your environment
+
+Take a few moments to explore your environment and setup up tools, shells, packages you like to use.
+You are on a Red Linux 7 control node, like many real world customers, with `ansible` and other tools and utilities installed.
+In this section you will:
+
+* If desired install your favorite editors and tools, `vim` is pre-installed
+* Explore the installed Ansible environment and configuration
+* Validate Ansible can work with the lab infrastructure
+
+. Explore your `ansible` setup
++
+
+[source,bash]
+----
+[devops@control 0 ~]$ ansible --version
+----
++
+
+.Sample Output
+[source,bash]
+----
+ansible 2.9.14
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/home/devops/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python2.7/site-packages/ansible
+  executable location = /bin/ansible
+  python version = 2.7.5 (default, Jun 11 2019, 14:33:56) [GCC 4.8.5 20150623 (Red Hat 4.8.5-39)]
+----
++
+
+. Explore your lab environment
++
+
+[source,sh]
+----
+[devops@control 0 ~]$ ansible all --list-hosts
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+
+  hosts (5):
+    app1.example.com
+    app2.example.com
+    appdb1.example.com
+    frontend1.example.com
+    tower.example.com
+----
+
+. Check you have a working `ssh` config and that `ansible` can connect
++
+
+[source,bash]
+----
+[devops@control 0 ~] $ ansible all -m ping
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+app1.example.com | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+appdb1.example.com | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+
+... <TRUNCATED>
+----
+
+. Examine any other files or directories which may be of interest e.g.
+
+* `/etc/ansible/hosts`
+* `~/.ssh/config`
+
+In the next section we will create and work with our first Collection.
