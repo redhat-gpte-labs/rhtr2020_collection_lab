@@ -214,9 +214,9 @@ If not a full solution is provided at the end of the section.
 |====
 
 
-=== Solution
+==== Solution
 
-. A full solution can be downloaded here
+. A full solution can be viwed link:https://github.com/redhat-gpte-labs/rhtr2020_collection_lab/blob/master/resources/tower-load-flask-deployer.yml[here] and downloaded with `wget` 
 +
 
 [source,sh]
@@ -236,6 +236,9 @@ HTTP request sent, awaiting response... 200 OK
 Length: 1712 (1.7K) [text/plain]
 Saving to: ‘tower-load-flask-deployer.yml’
 ----
+
+
+In the next section you will launch your Ansible Tower `job_template` and validate the results.
 
 . Run your playbook providing your GUID to identify your `ssh` key
 +
