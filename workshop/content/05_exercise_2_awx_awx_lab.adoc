@@ -243,33 +243,3 @@ Saving to: ‘tower-load-flask-deployer.yml’
 
 In the next section you will launch your Ansible Tower `job_template` and validate the results.
 
-. Run your playbook providing your GUID to identify your `ssh` key
-+
-
-[source,bash,subs="attributes,verbatim"]
-----
-[devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID={GUID}
-----
-
-. Re-run the `awx project` command you used previously to see if a new project was created.
-+
-
-[source,sh]
-----
-awx projects list -f human
-----
-+
-.Sample Output
-[source,texinfo]
-----
-id name                    
-== ======================= 
-6  Demo Project            
-8  Multitier Flask Project 
-----
-+
-
-You can also browse the console of your Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}* account and
-*{SSH_PASSWORD}* as the password.
-
-. Launch your newly created Tower `job_template` with the `awx` command

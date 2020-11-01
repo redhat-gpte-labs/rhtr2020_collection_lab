@@ -31,8 +31,11 @@ If you wish to continue your exploration of collections 3 *Bonus Labs* or challe
 These are broadly described over the next 3 sections but *do not* provide solutions.
 
 . Repeat the entire lab using the upstream Ansible 2.10 release
-. Explore, and use, the `redhat_cop.tower_configuration` collection
-. 
+. Explore, and use, the `redhat_cop.tower_configuration` collection to configure Ansible Tower
+** The CoP (Community of Practice) Collection is built on top of `awx.awx`.
+. Re-write the Postgres role in the Flask Deployer solution as a Collection
+
+Some _started_ tips for each of the above challenges follow in the remaining section
 
 
 === Using the `awx.awx` Collection

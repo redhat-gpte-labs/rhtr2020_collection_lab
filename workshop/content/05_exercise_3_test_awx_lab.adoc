@@ -184,5 +184,5 @@ Congratulations you have completed the *Ansible Collections Lab* during which yo
 * Used an upstream collection to configure an Ansible Tower instance
 * Ran and validated the resulting `job_template`
 
-3 *Bonus Challenges are available if you want to dive deeper into collections in the
+3 *Bonus Challenges* are available if you want to dive deeper into collections in the
 

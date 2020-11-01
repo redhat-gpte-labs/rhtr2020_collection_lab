@@ -30,8 +30,8 @@ So `ansible-playbook` fully supports collections using both the `collections` ke
 What about other ansible commands? Such as *Ad-Hoc* commands with `ansible`?
 
 . Try an `ansible` *Ad-Hoc* command just using the module name `my_module`
-
 +
+
 [source,sh]
 ----
 ansible localhost -m my_module
@@ -44,10 +44,12 @@ ansible localhost -m my_module
 localhost | FAILED! => {
     "msg": "The module my_module was not found in configured module paths"
 }
+----
++
 
 . Now retry the `ansible` *Ad-Hoc* command using the FQCN
-
 +
+
 [source,sh]
 ----
 ansible localhost -m redhat.rhtr.my_module

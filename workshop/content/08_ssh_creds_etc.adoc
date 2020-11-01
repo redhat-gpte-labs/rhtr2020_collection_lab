@@ -1,0 +1,76 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:GITLAB_URL: %gitlab_url%
+:GITLAB_USERNAME: %gitlab_username%
+:GITLAB_PASSWORD: %gitlab_password%
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: true
+
+
+In case you get logged out, forget where your credentials are etc, here is everything you need for access.
+
+
+=== Access Options for your Control Node
+
+As mentioned in the introduction you have a number of ways to access your control node.
+The entire lab can be completed, and verified, from the command line, however Ansible Tower credentials will be supplied.
+
+. `ssh` directly from the terminal session in your browser
+. `ssh` directly from your laptop
+. Use Visual Studio Code as outlined in the next Section
+
+==== Use SSH to remotely connect to the lab control host
+
+
+. Either in the terminal session in your browser or from your laptop `ssh` to `control`.
++
+
+Your `ssh` password is *{SSH_PASSWORD}*
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+$ {SSH_COMMAND} 
+----
++
+
+. Become the `devops` Service Account User with `sudo`
++
+
+The `devops` user has password-less sudo access and fully configured ssh access to all other systems in the lab environment.
+
+. After successfully logging in to the control node, become the `devops` user:
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+[student@control 0 ~]$ sudo su - devops
+----
+
+=== Access Visual Studio Code
+
+. Access link:`{VSCODE_UI_URL}[Visual Studio Code], password *{VSCODE_UI_PASSWORD}* when prompted.
++
+You are already logged in as the `devops` Service Account with Visual Studio Code
+
+

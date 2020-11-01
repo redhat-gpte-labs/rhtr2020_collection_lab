@@ -31,7 +31,7 @@ modules:
     exit_sign: Exercise 2.3
   05_exercise_3_test_awx_lab:
     name: Exercise 2.3 - Test Ansible Tower Configuration
-    exit_sign: Exercise 3.1
+    exit_sign: Bonus Labs
   06_exercise_1_bonus_labs:
     name: Exercise 3.1 - Bonus Labs
     exit_sign: Exercise 3.2
@@ -43,3 +43,6 @@ modules:
     exit_sign: Resources
   07_resources:
     name: Resources
+    exit_sign: 'Reference: SSH Credentials'
+  08_ssh_creds_etc:
+    name: 'Reference: SSH Credentials'
