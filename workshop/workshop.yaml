@@ -13,7 +13,7 @@ modules:
     - 05_exercise_2_awx_awx_lab
     - 05_exercise_3_test_awx_lab
     - 06_exercise_1_bonus_labs
-    - 06_exercise_2_bonus_lab_tower_cop_collection
-    - 06_exercise_3_bonus_lab_postgres_collection
+    - 06_exercise_2_bonus_lab_ansible_2_10
+    - 06_exercise_3_bonus_lab_cop_tower_collection
     - 07_resources
     - 08_ssh_creds_etc

@@ -1,0 +1,39 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: tru
+
+
+The Red Hat *Automation Community of Practice* has created its own collection `redhat_cop.tower_configuration` that builds on, and extends, `awx.awx`.
+
+
+* Explore the collection online: link:https://github.com/redhat-cop/tower_configuration[`redhat_cop.tower_configuration`]
+** Pay particular attention to the link:https://github.com/redhat-cop/tower_configuration/tree/devel/roles[`roles`] directory
+** Take a look at a role in more detail e.g. link:https://github.com/redhat-cop/tower_configuration/blob/devel/roles/users/tasks/main.yml[users]
+** Explore how it specifies its link:https://github.com/redhat-cop/tower_configuration/blob/devel/galaxy.yml.j2[dependency] on the awx.awx` collection 
+
+Finally write a playbook that uses this collection:
+
+* Perhaps add several new users to Ansible Tower
+* Alternatively your earlier `awx.awx` lab deployed an application, the same repository contains a link:https://github.com/tonykay/solution_ansible_flask_app_loader_all_in_one/blob/main/teardown-app.yml[teardown] playbook
+** Using `redhat_cop.tower_configuration` create a new `job_template` and launch with the `awx` cli (refer to Exercise 2.2 and 2.3 if necessary)

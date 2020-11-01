@@ -46,7 +46,7 @@ This lab, running on `2.9.14` will do some manual steps which may soon be unnece
 +
 [source,sh]
 ----
-ls ~/.ansible
+$ ls ~/.ansible
 ----
 +
 .Sample Output
@@ -70,7 +70,7 @@ Because we will start by creating our own collection we will have to do this man
 +
 [source,sh]
 ----
-[devops@control 0 ~]$ ansible-galaxy collection init --init-path ~/.ansible/collections/ansible_collections redhat.rhtr 
+$ ansible-galaxy collection init --init-path ~/.ansible/collections/ansible_collections redhat.rhtr 
 ----
 +
 
@@ -87,7 +87,7 @@ Because we will start by creating our own collection we will have to do this man
 
 [source,bash]
 ----
-[devops@control 0 ~]$ tree ~/.ansible/collections/
+$ tree ~/.ansible/collections/
 ----
 +
 
@@ -176,7 +176,7 @@ You will add a simple module, then explore ways to use it from your collection.
 
 [source,bash]
 ----
-[devops@control 0 ~]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/my_module.py
+$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/my_module.py
 ----
 
 . Create a `modules` sub-directory within your collections plugins directory:
@@ -184,7 +184,7 @@ You will add a simple module, then explore ways to use it from your collection.
 
 [source,bash]
 ----
-[devops@control 0 ~]$ mkdir ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
+$ mkdir ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
 ----
 
 . Move your module to the collections `plugins/modules` directory
@@ -192,7 +192,7 @@ You will add a simple module, then explore ways to use it from your collection.
 
 [source,bash]
 ----
-[devops@control 0 ~]$ mv my_module.py ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
+$ mv my_module.py ~/.ansible/collections/ansible_collections/redhat/rhtr/plugins/modules
 ----
 
 === Using your new collection
@@ -203,15 +203,6 @@ Or alternatively, using the *Fully Qualified Collection Name*
 Let`s explore both.
 
 ==== Using the `collections` keyword
-
-. Make and cd into a project folder called `rhtr-lab`
-+
-
-[source,bash]
-----
-[devops@control 0 ~]$ mkdir rhtr-lab
-[devops@control 0 ~]$ cd rhtr-lab
-----
 
 . Create a simple playbook `collections-keyword.yml`
 +
@@ -240,7 +231,7 @@ Let`s explore both.
 
 [source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-playbook collections-keyword.yml
+$ ansible-playbook collections-keyword.yml
 ----
 +
 
@@ -317,7 +308,7 @@ The *recommended* practice, when working with *collections*, is to to use FQCNs 
 +
 [source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-playbook fqcn.yml 
+$ ansible-playbook fqcn.yml 
 ----
 +
 

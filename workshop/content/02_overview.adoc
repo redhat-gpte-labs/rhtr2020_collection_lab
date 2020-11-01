@@ -101,7 +101,7 @@ The `devops` user has password-less sudo access and fully configured ssh access 
 
 [source,bash,subs="attributes,verbatim"]
 ----
-[student@control 0 ~]$ sudo su - devops
+$ sudo su - devops
 ----
 
 === Working with your Infrastructure

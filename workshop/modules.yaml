@@ -34,12 +34,12 @@ modules:
     exit_sign: Bonus Labs
   06_exercise_1_bonus_labs:
     name: Exercise 3.1 - Bonus Labs
-    exit_sign: Exercise 3.2
-  06_exercise_2_bonus_lab_tower_cop_collection:
-    name: Exercise 3.2 - Ansible CoP Tower Collection
-    exit_sign: Exercise 3.2
-  06_exercise_3_bonus_lab_postgres_collection:
-    name: Exercise 3.3 - Postgres Collection
+    exit_sign: Bonus Lab 1
+  06_exercise_2_bonus_lab_ansible_2_10:
+    name: "Bonus Lab 1: Using Ansible 2.10"
+    exit_sign: Bonus Lab 2
+  06_exercise_3_bonus_lab_cop_tower_collection:
+    name: "Bonus Lab 2: Using Automation CoP Tower Collection"
     exit_sign: Resources
   07_resources:
     name: Resources

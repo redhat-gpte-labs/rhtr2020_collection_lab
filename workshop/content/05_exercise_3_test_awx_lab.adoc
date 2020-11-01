@@ -31,7 +31,7 @@ In this section you will launch your Ansible Tower `job_template` and validate t
 
 [source,bash,subs="attributes,verbatim"]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID={GUID}
+$ ansible-playbook tower-load-flask-deployer.yml -e GUID={GUID}
 ----
 
 . Re-run the `awx project list` command you used previously to see if a the new `Multitier Flask Project` was created
@@ -39,8 +39,7 @@ In this section you will launch your Ansible Tower `job_template` and validate t
 
 [source,sh]
 ----
-
-[devops@control 0 ~]$ awx projects list -f human
+$ awx projects list -f human
 ----
 +
 .Sample Output
@@ -68,7 +67,7 @@ You may see a short delay before this starts, less than 1 or 2 minutes.
 +
 [source,sh]
 ----
-[devops@control 0 ~]$ awx job_template launch "Multitier Job Template" --monitor
+$ awx job_template launch "Multitier Job Template" --monitor
 ----
 +
 .Sample Output
@@ -125,7 +124,7 @@ Smoketest Postgres database --------------------------------------------- 0.43s
 +
 [source,sh]
 ----
- [devops@control 0 ~]$ curl -s frontend1/api/resources | jq
+$ curl -s frontend1/api/resources | jq
 ----
 +
 .Sample Output
@@ -168,7 +167,7 @@ Smoketest Postgres database --------------------------------------------- 0.43s
 ----
 +
 
-You can also browse to frontend from your laptop and explore link:http://frontend1.z57dj.{GUID}.{OSP_DOMAIN}/resources_api.html[Frontend External Api]
+You can also browse to frontend from your laptop and explore link:http://frontend1.z57dj.{GUID}.{OSP_DOMAIN}/resources_api.html[Frontend External API]
 
 == Lab Complete!
 

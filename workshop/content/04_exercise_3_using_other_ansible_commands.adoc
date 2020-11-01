@@ -34,7 +34,7 @@ What about other ansible commands? Such as *Ad-Hoc* commands with `ansible`?
 
 [source,sh]
 ----
-ansible localhost -m my_module
+$ ansible localhost -m my_module
 ----
 +
 
@@ -52,7 +52,7 @@ localhost | FAILED! => {
 
 [source,sh]
 ----
-ansible localhost -m redhat.rhtr.my_module
+$ ansible localhost -m redhat.rhtr.my_module
 ----
 +
 
@@ -87,7 +87,7 @@ collections_path: collections:/opt/our/collections
 +
 [source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-doc my_module
+$ ansible-doc my_module
 ----
 +
 .Sample Output
@@ -104,7 +104,7 @@ Ansible is unable to find the module
 +
 [source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-doc redhat.rhtr.my_module
+$ ansible-doc redhat.rhtr.my_module
 ----
 +
 .Sample Output

@@ -55,7 +55,7 @@ The `devops` user has passwordless sudo access and fully configured ssh access t
 
 [source,bash,subs="attributes,verbatim"]
 ----
-[student@control 0 ~]$ sudo su - devops
+$ sudo su - devops
 ----
 
 === Explore your Ansible Configuration
@@ -142,8 +142,8 @@ appdb1.example.com | SUCCESS => {
 +
 
 . Confirm you can `ssh` directly to a host e.g. `appdb1`
-
 +
+
 [source,sh]
 ----
 [devops@control 0 ~]$ ssh appdb1
@@ -157,15 +157,17 @@ Warning: Permanently added 'appdb1' (ECDSA) to the list of known hosts.
 Last login: Sat Oct 31 14:15:37 2020 from 192.168.47.208
 [cloud-user@appdb1 ~]$ 
 ----
++
 
 . Exit back to your Control Node
-
 +
+
 [source,sh]
 ----
 [cloud-user@appdb1 ~]$ exit 
 ----
 +
+
 .Sample Output
 [source,texinfo]
 ----

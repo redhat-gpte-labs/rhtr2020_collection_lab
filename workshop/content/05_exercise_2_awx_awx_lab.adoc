@@ -42,7 +42,7 @@ You need to enable the repository and install it via yum.
 +
 [source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ sudo yum-config-manager --add-repo https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-el7.repo
+$ sudo yum-config-manager --add-repo https://releases.ansible.com/ansible-tower/cli/ansible-tower-cli-el7.repo
 ----
 +
 .Sample Output
@@ -59,7 +59,7 @@ repo saved to /etc/yum.repos.d/ansible-tower-cli-el7.repo
 +
 [source,sh]
 ----
-sudo yum install -y ansible-tower-cli
+$ sudo yum install -y ansible-tower-cli
 ----
 +
 .Sample Output
@@ -98,7 +98,7 @@ export TOWER_VERIFY_SSL=false
 
 [source,sh]
 ----
-[devops@control 0 ~]$ awx projects list -f human
+$ awx projects list -f human
 ----
 +
 
@@ -224,7 +224,7 @@ If not a full solution is provided at the end of the section.
 
 [source,sh]
 ----
-[devops@control 0 ~/rhtr-lab]$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/tower-load-flask-deployer.yml
+$ wget https://raw.githubusercontent.com/redhat-gpte-labs/rhtr2020_collection_lab/master/resources/tower-load-flask-deployer.yml
 ----
 +
 

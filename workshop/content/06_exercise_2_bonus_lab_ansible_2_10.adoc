@@ -1,0 +1,166 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: tru
+
+
+Repeat the entire lab with Ansible 2.10.
+As you install `2.10` take time to explore the way it is split into 2 parts:
+* `ansible-base`
+* `ansible`
+
+=== Some tips to get started below:
+
+Whilst `ansible 2.9` is current and supported major changes came in `ansible 2.10` and we will use this version, running in
+a python virtual environment in our lab.
+One of the biggest changes in `ansible 2.10` is the packaging.
+
+. Count how many modules are distributed with your current `ansible 2.9` release
++
+
+[source,bash]
+----
+$ ansible-doc -l | wc -l
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+3387
+----
++
+
+. Create and activate, a python virtual environment (or _`venv`_) in the `rhtr-lab` directory
+
++
+[source,bash]
+----
+$ python3 -m venv venv-ansible-2.10
+$ source venv-ansible-2.10 source venv-ansible-2.10/bin/activate
+----
++
+
+. Notice your prefix in your new prompt indicates the virtual environment is active
+
++
+[source,bash]
+----
+(venv-ansible-2.10) $
+----
+
+
+In Ansible 2.10 going forward `ansible` has been broken into 2 constituent parts. These can be seen in the python packages `ansible-base` and `ansible`.
+
+. Install the *core* of `ansible` using the python `pip` package `ansible-base`
+
+
++
+[source,bash]
+----
+(venv-ansible-2.10) $ pip install ansible-base
+----
++
+
+. Explore the newly installed `ansible`
++
+
+[source,bash]
+----
+(venv-ansible-2.10) $ type ansible
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+ansible is /home/devops/rhtr-lab/venv-ansible-2.10/bin/ansible
+----
+
+. Re-run the `ansible-doc` command with the `list` option
++
+
+[source,bash]
+----
+(venv-ansible-2.10) $ ansible-doc -l | wc -l
+----
++
+.Sample Output
+[source,texinfo]
+----
+68
+----
++
+
+Recall that `ansible 2.9` had greater than 3,000 modules. 
++
+
+. Re-run the above command but this time pipe to less to get a feel for what modules are in `ansible-base`
++
+
+[source,bash]
+----
+(venv-ansible-2.10) $ ansible-doc -l | less
+----
++
+
+An interesting mix of some Linux/UNIX centric modules, and some modules very core to actually running ansible itself e.g.
+`add_host`, `debug`, `import_tasks`
++
+
+. Now use `pip` to install the rest of `ansible` 
++
+
+[source,bash]
+----
+(venv-ansible-2.10) $ pip install ansible==2.10 
+----
++
+
+NOTE: Had `ansible-base` not been installed the pip install ansible command would have installed it as a dependency.
+
+. Re-run the `ansible-doc -l | wc -l` - expect to see some depreciation warnings
++
+
+[source,bash]
+----
+(venv-ansible-2.10) [devops@control 0 ~/rhtr-lab]$ ansible-doc -l | wc -l
+----
++
+
+.Sample Output
+[source,texinfo]
+----
+...
+[DEPRECATION WARNING]: See the plugin documentation for more details. This 
+feature will be removed from vyos.vyos in a release after 2022-06-01. 
+Deprecation warnings can be disabled by setting deprecation_warnings=False in 
+ansible.cfg.
+4429
+----
++
+
+At this point you can re-run the whole lab, but now using `ansible` `2.10`.
+See if you find any differences in behavior.
+
+
