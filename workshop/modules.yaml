@@ -6,8 +6,6 @@ modules:
   02_overview:
     name: Overview
     exit_sign: 'Optional - Using Visual Studio Code WebUI'
-      # 03_exercise_1_getting_started:
-      # name: Getting Started
   03_exercise_2_vscode_webui:
     name: 'Optional - Using Visual Studio Code'
     exit_sign: 'Optional - Using Ansible Tower WebUI'
@@ -33,7 +31,7 @@ modules:
     name: Exercise 2.3 - Test Ansible Tower Configuration
     exit_sign: Bonus Labs
   06_exercise_1_bonus_labs:
-    name: Exercise 3.1 - Bonus Labs
+    name: 'Exercise 3.1 - Bonus Labs'
     exit_sign: Bonus Lab 1
   06_exercise_2_bonus_lab_ansible_2_10:
     name: "Bonus Lab 1: Using Ansible 2.10"
