@@ -11,6 +11,7 @@ modules:
     - 04_exercise_3_using_other_ansible_commands
     - 05_exercise_1_installing_existing_collection
     - 05_exercise_2_awx_awx_lab
+    - 05_exercise_3_test_awx_lab
     - 06_exercise_1_bonus_labs
     - 06_exercise_2_bonus_lab_tower_cop_collection
     - 06_exercise_3_bonus_lab_postgres_collection

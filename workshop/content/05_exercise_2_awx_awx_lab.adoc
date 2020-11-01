@@ -109,6 +109,9 @@ id name
 == ============ 
 6  Demo Project 
 ----
++
+
+This validates that you can work with your Ansible Tower installation via the `awx` command line client.
 
 // End of Section
 
@@ -243,9 +246,9 @@ In the next section you will launch your Ansible Tower `job_template` and valida
 . Run your playbook providing your GUID to identify your `ssh` key
 +
 
-[source,sh]
+[source,bash,subs="attributes,verbatim"]
 ----
-[devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID=n9j48
+[devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID={GUID}
 ----
 
 . Re-run the `awx project` command you used previously to see if a new project was created.

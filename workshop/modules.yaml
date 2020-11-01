@@ -28,6 +28,9 @@ modules:
     exit_sign: Exercise 2.2
   05_exercise_2_awx_awx_lab:
     name: Exercise 2.2 - AWX AWX Collection Lab
+    exit_sign: Exercise 2.3
+  05_exercise_3_test_awx_lab:
+    name: Exercise 2.3 - Test Ansible Tower Configuration
     exit_sign: Exercise 3.1
   06_exercise_1_bonus_labs:
     name: Exercise 3.1 - Bonus Labs

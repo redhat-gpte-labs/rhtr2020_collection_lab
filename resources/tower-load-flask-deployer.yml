@@ -50,6 +50,4 @@
       playbook: main.yml
       credentials: Multitier Flask Private Key
 
-  - name: Launch AWX Three Tier Job
-    awx.awx.tower_job_launch:
-      job_template: Multitier Job Template
+...

@@ -1,0 +1,188 @@
+:GUID: %guid%
+:OSP_DOMAIN: dynamic.opentlc.com
+:TOWER_URL: %tower_url%
+:TOWER_ADMIN_USER: %tower_admin_user%
+:TOWER_ADMIN_PASSWORD: %tower_admin_password%
+:SSH_COMMAND: %ssh_command%
+:SSH_PASSWORD: %ssh_password%
+:VSCODE_UI_URL: %vscode_ui_url%
+:VSCODE_UI_PASSWORD: %vscode_ui_password%
+:organization_name: Default
+:gitlab_project: ansible/gitops-lab
+:project_prod: Project gitOps - Prod
+:project_test: Project gitOps - Test
+:inventory_prod: GitOps inventory - Prod Env
+:inventory_test: GitOps inventory - Test Env
+:credential_machine: host_credential
+:credential_git: gitlab_credential
+:credential_git_token: gitlab_token 
+:credential_openstack: cloud_credential
+:jobtemplate_prod: App deployer - Prod Env
+:jobtemplate_test: App deployer - Test Env
+:source-linenums-option:        
+:markup-in-source: verbatim,attributes,quotes
+:show_solution: tru
+
+
+In this section you will launch your Ansible Tower `job_template` and validate the results.
+
+. Run your playbook providing the `extra-var` GUID, supplied below, which identifies your subdomain the prefix of your `ssh` key
++
+
+[source,bash,subs="attributes,verbatim"]
+----
+[devops@control 0 ~/rhtr-lab]$ ansible-playbook tower-load-flask-deployer.yml -e GUID={GUID}
+----
+
+. Re-run the `awx project list` command you used previously to see if a the new `Multitier Flask Project` was created
++
+
+[source,sh]
+----
+
+[devops@control 0 ~]$ awx projects list -f human
+----
++
+.Sample Output
+[source,texinfo]
+----
+id name                    
+== ======================= 
+6  Demo Project            
+8  Multitier Flask Project 
+----
++
+
+You can also browse the console of your Ansible Tower web UI as the administrator using the *{TOWER_ADMIN_USER}* account and
+*{SSH_PASSWORD}* as the password.
+
+. Launch your newly created Tower `job_template` with the `awx` command
++
+[NOTE]
+====
+You will use the `--monitor` option which allows you to see the playbook logs in real time.
+You may see a short delay before this starts, less than 1 or 2 minutes.
+
+====
+
++
+[source,sh]
+----
+[devops@control 0 ~]$ awx job_template launch "Multitier Job Template" --monitor
+----
++
+.Sample Output
+[source,texinfo]
+----
+Identity added: /tmp/awx_5_h19cjr7_/artifacts/5/ssh_key_data (/tmp/awx_5_h19cjr7_/artifacts/5/ssh_key_data)
+
+PLAY [Deploy, configure, and populate Postgres 10] *****************************
+
+TASK [Install Postgres packages] ***********************************************
+Sunday 01 November 2020  14:41:37 +0000 (0:00:00.022)       0:00:00.022 *******
+ok: [appdb1] => (item=https://download.postgresql.org/pub/repos/yum/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm)
+ok: [appdb1] => (item=[u'postgresql10', u'postgresql10-server', u'postgresql10-contrib', u'postgresql10-libs'])
+ok: [appdb1] => (item=python-psycopg2)
+
+
+<OUTPUT OMITTED>
+
+PLAY RECAP *********************************************************************
+app1                       : ok=11   changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+app2                       : ok=13   changed=2    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+appdb1                     : ok=8    changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+frontend1                  : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+Sunday 01 November 2020  14:42:00 +0000 (0:00:00.623)       0:00:23.889 *******
+===============================================================================
+Install flask packages -------------------------------------------------- 6.34s
+Install Postgres packages ----------------------------------------------- 3.38s
+Setup pre-requisite pip3 packages --------------------------------------- 1.29s
+Create virtualenv venv-resource_hub for Flask --------------------------- 1.23s
+Install flask repo https://github.com/tonykay/resource_hub.git ---------- 1.03s
+Install load balancer packages ------------------------------------------ 0.93s
+Create flask user ------------------------------------------------------- 0.90s
+Setup Postgres as started and enabled on boot. -------------------------- 0.90s
+Initialize flask app database resources --------------------------------- 0.77s
+Setup Postgres database(s) ---------------------------------------------- 0.74s
+Check webserver for correct response ------------------------------------ 0.62s
+Setup Postgres for remote password auth --------------------------------- 0.58s
+Gathering Facts --------------------------------------------------------- 0.58s
+Enable Haproxy ---------------------------------------------------------- 0.56s
+Create Postgres user#(s) ------------------------------------------------ 0.51s
+template systemd service config ----------------------------------------- 0.47s
+Generate resource_hub startup script ------------------------------------ 0.46s
+Smoketest Postgres database --------------------------------------------- 0.43s
+
+<OUTPUT OMITTED>
+
+----
++
+
+. Validate your application has deployed as expected by using `curl` with the API you just installed
+
+
++
+[source,sh]
+----
+ [devops@control 0 ~]$ curl -s frontend1/api/resources | jq
+----
++
+.Sample Output
+[source,texinfo]
+----
+[
+  {
+    "author": "That Jeff Geerlinguy",
+    "description": "Classic introduction to Ansible",
+    "id": 1,
+    "name": "Ansible for DevOps",
+    "source": "Book",
+    "url": "https://leanpub.com/ansible-for-devops"
+  },
+  {
+    "author": "James Freeman, Jesse Keating",
+    "description": "Explores how Ansible works",
+    "id": 2,
+    "name": "Mastering Ansible 3rd Edition",
+    "source": "Book",
+    "url": "https://www.packtpub.com/virtualization-and-cloud/mastering-ansible-third-edition`"
+  },
+  {
+    "author": "Tok",
+    "description": "Tony Kay's Ansible centric Blog",
+    "id": 3,
+    "name": "CloudAssember",
+    "source": "Blog",
+    "url": "http://www.cloudassembler.com/"
+  },
+  {
+    "author": "Aditya Patawari, Vikas Aggarwal",
+    "description": "Overview of Ansible in common Cloud Environments",
+    "id": 4,
+    "name": "Ansible 2 Cloud Automation Cookbook",
+    "source": "Book",
+    "url": "https://www.packtpub.com/virtualization-and-cloud/ansible-2-cloud-automation-cookbook"
+  }
+]
+----
++
+
+You can also browse to frontend from your laptop and explore link:http://frontend1.z57dj.{GUID}.{OSP_DOMAIN}/resources_api.html[Frontend External Api]
+
+== Lab Complete!
+
+Congratulations you have completed the *Ansible Collections Lab* during which you:
+
+* Created your own simple collection
+* Used the `ansible-galaxy` command to
+** Create a skeleton for your own collection
+** Install an existing collection
+* Learnt the 2 ways to call a collection module in a playbook
+** `collections` keyword
+** *FQCN* (Fully Qualified Domain Name)
+* Used an upstream collection to configure an Ansible Tower instance
+* Ran and validated the resulting `job_template`
+
+3 *Bonus Challenges are available if you want to dive deeper into collections in the
+
